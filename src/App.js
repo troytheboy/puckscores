@@ -5,7 +5,7 @@ import 'request'
 //import 'jquery'
 let request = require('request');
 let $ = require('jquery')
-const nhlAPI = 'https://statsapi.web.nhl.com/'
+const nhlAPI = 'https://statsapi.web.nhl.com/api/v1/schedule/'
 let first = true;
 
 class App extends Component {
@@ -50,11 +50,23 @@ class Scoreboard extends Component{
     return gamesHTML;
   }
 
+  stringifyDate(date) {
+    return (date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+  }
+
   getGames() {
+    let startDate = this.stringifyDate(this.state.date);
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    //console.log(new Date(this.state.date + 1))
+    let endDate = this.stringifyDate(tomorrow);
+
     let x;
-    let jqxhr = $.getJSON(nhlAPI + 'api/v1/schedule')
+    let jqxhr = $.getJSON(nhlAPI + '?startDate=' + startDate + '&endDate=' + endDate)
       .then((data) => {
         this.setState({games : data.dates[0].games})
+        //console.log(nhlAPI + '?startDate=2017-10-3&endDate=2017-10-4');
+        //console.log(data);
       })
       .done((data) => {
         x = data;
