@@ -1,0 +1,81 @@
+$blue : #607D8B;
+$white : white;
+$grey : #E2E7B7;
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 200px;
+  padding: 20px;
+  color: white;
+  margin-bottom: 10px;
+  img {
+    max-width: 100px;
+  }
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+div.gameSelector {
+  margin-top: 10px;
+  div.row {
+    text-align: center;
+  }
+}
+.game {
+  height: 108px;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  border: 2px solid black;
+  div.teamScore {
+    margin-top: 5px;
+    min-height: 30px;
+    img {
+      max-width: 25px;
+      max-height: 2em;
+      display: inline;
+      margin-right: 3px;
+    }
+    h3 {
+      font-size: 14px;
+      margin: 0px;
+      display: inline-block;
+      min-width: 35px;
+    }
+    small {
+      font-size: 14px;
+    }
+    span.logo {
+      min-width: 40px;
+      display: inline-block;
+    }
+    strong {
+      h3 {
+        font-weight: 700;
+      }
+    }
+  }
+  p {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
