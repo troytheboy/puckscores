@@ -44,6 +44,9 @@ div.daySelector {
   font-size: 22px;
   div.row {
     text-align: center;
+    i {
+      cursor: pointer;
+    }
   }
 }
 .game {
