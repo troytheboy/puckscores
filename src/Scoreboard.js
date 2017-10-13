@@ -160,7 +160,7 @@ function Game(props) {
     homeObject = (<div className="teamScore">
       <span><img src={"img/teams/" + home.team.abbreviation + ".png"} alt={home.team.abbreviation}/></span>
       <h3>{home.team.abbreviation}</h3> <strong>{home.goals}</strong><span className="hidden-xs"> | {home.shotsOnGoal} shots</span></div>)
-  } else if (statusCode === '1') { //pre-game
+  } else if (statusCode === '1' || statusCode === '2') { //pre-game
     let startTime = new Date(game.gameData.datetime.dateTime);
     let hours = startTime.getHours();
     let minutes = startTime.getMinutes();
