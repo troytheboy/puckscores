@@ -42,7 +42,7 @@ class Scoreboard extends Component{
 
   getGames(date) {
     $('#loading').show();
-    $('.Scoreboard').hide();
+    $('.games').hide();
     let startDate = this.stringifyDate(date);
     let dateString = ((date.getMonth() + 1) + "/" + date.getDate());
     this.setState({dateString : dateString});
@@ -83,7 +83,7 @@ class Scoreboard extends Component{
               this.forceUpdate () // force render
               setTimeout(function() {
                 $('#loading').hide();
-                $('.Scoreboard').show();
+                $('.games').show();
               }, 300)
             })
         })
@@ -117,7 +117,7 @@ class Scoreboard extends Component{
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className="row games">
             {this.renderGames()}
           </div>
         </div>
@@ -191,10 +191,10 @@ function Game(props) {
     if(linescore.currentPeriod > 3) {
       statusString += (" " + linescore.currentPeriodOrdinal);
     }
-    awayObject = (<div className="teamScore">
+    awayObject = (<div className="teamScore final">
       <span className="logo"><img src={"img/teams/" + away.team.abbreviation + ".png"} alt={away.team.abbreviation}/></span>
       {awayText}</div>)
-    homeObject = (<div className="teamScore">
+    homeObject = (<div className="teamScore final">
       <span className="logo"><img src={"img/teams/" + home.team.abbreviation + ".png"} alt={home.team.abbreviation}/></span>
       {homeText}</div>)
   }
