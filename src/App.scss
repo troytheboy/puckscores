@@ -1,9 +1,16 @@
-$blue : #607D8B;
-$white : white;
-$grey : #E2E7B7;
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+
+$dark_blue : #0b132b;
+$blue : #1c2541;
+$light_blue : #3a506b;
+$cyan : #5bc0be;
+$white: #ffffff;
 
 .App {
   text-align: center;
+  background-color: $white;
+  height: 100vh;
 }
 
 .App-logo {
@@ -12,13 +19,13 @@ $grey : #E2E7B7;
 }
 
 .App-header {
-  background-color: #222;
+  background-color: $cyan;
   height: 200px;
   padding: 20px;
   color: white;
   margin-bottom: 10px;
   img {
-    max-width: 100px;
+    max-width: 400px;
   }
 }
 
@@ -26,26 +33,33 @@ $grey : #E2E7B7;
   font-size: large;
 }
 
-@keyframes App-logo-spin {
+@keyframes Loading-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-div.gameSelector {
+div.daySelector {
+  font-family: 'Orbitron', sans-serif;
   margin-top: 10px;
+  color: $blue;
+  font-size: 22px;
   div.row {
     text-align: center;
   }
 }
 .game {
   height: 108px;
-  text-align: left;
+  text-align: center;
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 5px;
   border-radius: 3px;
-  border: 2px solid black;
+  border: 2px solid $blue;
+  background: $white;
   div.teamScore {
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
     margin-top: 5px;
     min-height: 30px;
     img {
@@ -55,7 +69,7 @@ div.gameSelector {
       margin-right: 3px;
     }
     h3 {
-      font-size: 14px;
+      font-size: 16px;
       margin: 0px;
       display: inline-block;
       min-width: 35px;
@@ -74,8 +88,42 @@ div.gameSelector {
     }
   }
   p {
+    color: $cyan;
+    font-weight: 700;
     text-align: center;
     margin-top: 5px;
     margin-bottom: 5px;
+  }
+}
+
+div.loading {
+  img {
+    animation: Loading-spin infinite 2s linear;
+    margin-top: 125px;
+    width: 200px;
+    color: $blue;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .App-header {
+    img {
+      width: 200px;
+    }
+    height: 120px;
+  }
+  .game {
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    div.teamScore {
+      text-align: center;
+      width: 100px;
+      h3 {
+        font-size: 14px;
+      }
+      .visible-xs {
+        display: inline-block!important;
+      }
+    }
   }
 }
