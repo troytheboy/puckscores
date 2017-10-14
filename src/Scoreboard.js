@@ -12,12 +12,18 @@ class Scoreboard extends Component{
       date: new Date(),
       games : [],
       links : [],
-      gameData : []
+      gameData : [],
+      final: []
     };
   }
 
   componentDidMount() {
     this.getGames(this.state.date);
+    setInterval(() => {
+      if (this.state.games.length > this.state.final.length) {
+        this.changeDate(null, -1);
+      }
+    }, 100000);
   }
 
   componentWillUnmount() {
@@ -56,6 +62,9 @@ class Scoreboard extends Component{
         let games = data.dates[0].games;
         let links = [];
         games.forEach( (game) => {
+          if (game.status.abstractGameState === 'Final') {
+            this.state.final.push(game);
+          }
           links.push(game.link);
           $.getJSON(nhlAPI + game.link)
             .then((data) => {
@@ -97,7 +106,8 @@ class Scoreboard extends Component{
       date: newDate,
       games : [],
       links : [],
-      gameData : []
+      gameData : [],
+      final : []
     });
     this.getGames(newDate);
   }
@@ -132,7 +142,6 @@ class Scoreboard extends Component{
 }
 
 function Game(props) {
-
   let game = props.value;
   let liveData = game.liveData;
   let linescore = liveData.linescore;
@@ -154,10 +163,10 @@ function Game(props) {
       timeRemaining = timeRemaining.slice(1);
     }
     statusString = period + " " + timeRemaining;
-    awayObject = (<div className="teamScore">
+    awayObject = (<div className="teamScore inProgress">
       <span><img src={"img/teams/" + away.team.abbreviation + ".png"} alt={away.team.abbreviation}/></span>
       <h3>{away.team.abbreviation}</h3> <strong>{away.goals}</strong><span className="hidden-xs"> | {away.shotsOnGoal} shots</span></div>)
-    homeObject = (<div className="teamScore">
+    homeObject = (<div className="teamScore inProgress">
       <span><img src={"img/teams/" + home.team.abbreviation + ".png"} alt={home.team.abbreviation}/></span>
       <h3>{home.team.abbreviation}</h3> <strong>{home.goals}</strong><span className="hidden-xs"> | {home.shotsOnGoal} shots</span></div>)
   } else if (statusCode === '1' || statusCode === '2') { //pre-game
