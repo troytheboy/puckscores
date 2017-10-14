@@ -13,14 +13,15 @@ class Scoreboard extends Component{
       games : [],
       links : [],
       gameData : [],
-      final: []
+      final: [],
+      active: []
     };
   }
 
   componentDidMount() {
     this.getGames(this.state.date);
     setInterval(() => {
-      if (this.state.games.length > this.state.final.length) {
+      if (this.state.games.length > this.state.final.length && this.state.active.length > 0) {
         this.changeDate(null, -1);
       }
     }, 100000);
@@ -65,6 +66,9 @@ class Scoreboard extends Component{
           if (game.status.abstractGameState === 'Final') {
             this.state.final.push(game);
           }
+          if (game.status.abstractGameState === 'In Progress') {
+            this.state.active.push(game);
+          }
           links.push(game.link);
           $.getJSON(nhlAPI + game.link)
             .then((data) => {
@@ -77,11 +81,15 @@ class Scoreboard extends Component{
                   gameData.push(data);
                 } else {
                   let storedDateTime = gameData[i].gameData.datetime.dateTime;
-                  if (dateTime < storedDateTime) {
-                    gameData.splice(i, 0, data);
-                    i = length;
-                  } else if (length - 1 === i) {
+                  if (data.gameData.status.abstractGameState === 'Final' && this.state.active.length > 0) {
                     gameData.push(data);
+                  } else {
+                    if (dateTime < storedDateTime) {
+                      gameData.splice(i, 0, data);
+                      i = length;
+                    } else if (length - 1 === i) {
+                      gameData.push(data);
+                    }
                   }
                 }
                 i++;
@@ -107,7 +115,8 @@ class Scoreboard extends Component{
       games : [],
       links : [],
       gameData : [],
-      final : []
+      final : [],
+      active : []
     });
     this.getGames(newDate);
   }
@@ -150,25 +159,21 @@ function Game(props) {
   let status = game.gameData.status;
   let statusCode = status.statusCode;
   let statusString = status.abstractGameState;
-  let awayObject = (<div className="teamScore">
-      <span><img src={"img/teams/" + away.team.abbreviation + ".png"} alt={away.team.abbreviation}/></span>
-      <h3 className="hidden-xs">{away.team.name}</h3><h3 className="visible-xs">{away.team.abbreviation}</h3></div>);
-  let homeObject = (<div className="teamScore">
-      <span><img src={"img/teams/" + home.team.abbreviation + ".png"} alt={home.team.abbreviation}/></span>
-      <h3 className="hidden-xs">{home.team.name}</h3><h3 className="visible-xs">{home.team.abbreviation}</h3></div>);
   let period = linescore.currentPeriodOrdinal;
   let timeRemaining = linescore.currentPeriodTimeRemaining;
+  let boardObject = (<div className="board"><p>{statusString}</p></div>)
+  let matchup = (<div className="matchup"><h3>{away.team.abbreviation} @ {home.team.abbreviation}</h3></div>)
   if (statusCode >= 3 && statusCode < 5) {
     if (timeRemaining.startsWith('0')) {
       timeRemaining = timeRemaining.slice(1);
     }
     statusString = period + " " + timeRemaining;
-    awayObject = (<div className="teamScore inProgress">
-      <span><img src={"img/teams/" + away.team.abbreviation + ".png"} alt={away.team.abbreviation}/></span>
-      <h3>{away.team.abbreviation}</h3> <strong>{away.goals}</strong><span className="hidden-xs"> | {away.shotsOnGoal} shots</span></div>)
-    homeObject = (<div className="teamScore inProgress">
-      <span><img src={"img/teams/" + home.team.abbreviation + ".png"} alt={home.team.abbreviation}/></span>
-      <h3>{home.team.abbreviation}</h3> <strong>{home.goals}</strong><span className="hidden-xs"> | {home.shotsOnGoal} shots</span></div>)
+
+    boardObject = (<div className="board"><p>{statusString}</p>
+    <h2><img src={"img/teams/" + away.team.abbreviation + ".png"}
+     alt={away.team.abbreviation}/>{away.goals} - {home.goals}<img
+       src={"img/teams/" + home.team.abbreviation + ".png"}
+       alt={home.team.abbreviation}/></h2></div>);
   } else if (statusCode === '1' || statusCode === '2') { //pre-game
     let startTime = new Date(game.gameData.datetime.dateTime);
     let hours = startTime.getHours();
@@ -185,35 +190,30 @@ function Game(props) {
       hours -= 12;
     }
     statusString = hours + ":" + minutes;
+    boardObject = (<div className="board"><p>{statusString}</p>
+    <h2><img src={"img/teams/" + away.team.abbreviation + ".png"}
+     alt={away.team.abbreviation}/> VS <img
+       src={"img/teams/" + home.team.abbreviation + ".png"}
+       alt={home.team.abbreviation}/></h2>
+     <h3></h3></div>);
   } else if (statusString === 'Final') {
     // check who won
-    let awayText;
-    let homeText;
-    if (away.goals > home.goals) {
-      awayText = (<strong><h3>{away.team.abbreviation}</h3> <strong>{away.goals}</strong><span className="hidden-xs"> | {away.shotsOnGoal} shots</span></strong>)
-      homeText = (<span><h3>{home.team.abbreviation}</h3> {home.goals}<span className="hidden-xs"> | {home.shotsOnGoal} shots</span></span>)
-    } else {
-      homeText = (<strong><h3>{home.team.abbreviation}</h3> <strong>{home.goals}</strong><span className="hidden-xs"> | {home.shotsOnGoal} shots</span></strong>)
-      awayText = (<span><h3>{away.team.abbreviation}</h3> {away.goals}<span className="hidden-xs"> | {away.shotsOnGoal} shots</span></span>)
-    }
     // check if it went to OT
     if(linescore.currentPeriod > 3) {
       statusString += (" " + linescore.currentPeriodOrdinal);
     }
-    awayObject = (<div className="teamScore final">
-      <span className="logo"><img src={"img/teams/" + away.team.abbreviation + ".png"} alt={away.team.abbreviation}/></span>
-      {awayText}</div>)
-    homeObject = (<div className="teamScore final">
-      <span className="logo"><img src={"img/teams/" + home.team.abbreviation + ".png"} alt={home.team.abbreviation}/></span>
-      {homeText}</div>)
+    boardObject = (<div className="board"><p>{statusString}</p>
+      <h2><img src={"img/teams/" + away.team.abbreviation + ".png"}
+      alt={away.team.abbreviation}/>{away.goals} - {home.goals}<img
+      src={"img/teams/" + home.team.abbreviation + ".png"}
+      alt={home.team.abbreviation}/></h2></div>);
   }
 
   return(
     <div className="col-lg-3 col-md-3 col-sm-4 col-xs-6">
       <div className="game">
-        <p>{statusString}</p>
-        {awayObject}
-        {homeObject}
+        {boardObject}
+        {matchup}
       </div>
     </div>
   )

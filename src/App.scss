@@ -50,13 +50,10 @@ div.daySelector {
   }
 }
 .game {
-  //height: 108px;
   text-align: center;
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 10px;
-  border-radius: 3px;
-  border: 2px solid $blue;
   background: $white;
   div.final {
     max-width: 170px!important;
@@ -64,44 +61,37 @@ div.daySelector {
   div.inProgress {
     max-width: 160px!important;
   }
-  div.teamScore {
-    max-width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-    margin-top: 5px;
-    min-height: 30px;
-    img {
-      max-width: 25px;
-      max-height: 2em;
-      display: inline;
-      margin-right: 3px;
+  div.board {
+    background-color: $blue;
+    padding: 10px;
+    height: 145px;
+    p {
+      color: $cyan;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
-    h3 {
-      font-size: 16px;
-      margin: 0px;
-      display: inline-block;
-      min-width: 35px;
-    }
-    small {
-      font-size: 14px;
-    }
-    span.logo {
-      min-width: 40px;
-      display: inline-block;
-    }
-    strong {
-      h3 {
-        font-weight: 700;
+    h2 {
+      color: $white;
+      font-family: 'Orbitron', sans-serif;
+      img {
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 50px;
       }
     }
   }
-  p {
-    color: $cyan;
-    font-weight: 700;
+  div.matchup {
     text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    background-color: $cyan;
+    h3 {
+      margin-top: 0;
+      color: $white;
+      font-family: 'Orbitron', sans-serif;
+    }
   }
 }
 
@@ -113,33 +103,70 @@ div.loading {
     color: $blue;
   }
 }
-@media only screen and (max-width: 767px) {
-  .App-header {
-    img {
-      width: 200px;
+@media only screen and (max-width: 1200px) {
+    .game {
+      div.board {
+        h2 {
+          font-size: 16px;
+          img {
+            width: 50px;
+            margin-left: 5px;
+            margin-right: 5px;
+          }
+        }
+      }
     }
-    height: 120px;
+}
+@media only screen and (max-width: 500px) {
+  .App-header {
+    background-color: $cyan;
+    height: 100px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 10px;
+    img {
+      max-width: 200px;
+    }
   }
   .game {
-    max-width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    div.teamScore {
-      text-align: center;
-      width: 100px;
-      h3 {
-        font-size: 14px;
+    div.board {
+      height: 120px;
+      p {
+        font-size: 16px;
       }
-      .visible-xs {
-        display: inline-block!important;
+      h2 {
+        img {
+          margin-left: 2px;
+          margin-right: 2px;
+          width: 30px;
+        }
+      }
+    }
+    div.matchup {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      h3 {
+        margin: 0;
+        font-size: 15px;
       }
     }
   }
 }
-@media only screen and (max-width: 499px) {
+
+@media only screen and (max-width: 375px) {
   .game {
-    div.teamScore {
-      width: 90px;
+    div.board {
+      height: 75px;
+      p {
+        font-size: 12px;
+      }
+      h2 {
+        margin-top: 10px;
+        font-size: 14px;
+        img {
+          width: 20px;
+        }
+      }
     }
   }
 }
