@@ -118,6 +118,11 @@ div.loading {
     }
 }
 @media only screen and (max-width: 500px) {
+  div.loading {
+    img {
+      width: 100px;
+    }
+  }
   .App-header {
     background-color: $cyan;
     height: 100px;
