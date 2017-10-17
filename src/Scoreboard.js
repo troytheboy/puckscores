@@ -162,6 +162,7 @@ function Game(props) {
   let period = linescore.currentPeriodOrdinal;
   let timeRemaining = linescore.currentPeriodTimeRemaining;
   let boardObject = (<div className="board"><p>{statusString}</p></div>)
+  let mobileBoard = (<div className="board"><p>{statusString}</p></div>)
   let matchup = (<div className="matchup"><h3>{away.team.abbreviation} @ {home.team.abbreviation}</h3></div>)
   if (statusCode >= 3 && statusCode < 5) {
     if (timeRemaining.startsWith('0')) {
@@ -174,6 +175,22 @@ function Game(props) {
      alt={away.team.abbreviation}/>{away.goals} - {home.goals}<img
        src={"img/teams/" + home.team.abbreviation + ".png"}
        alt={home.team.abbreviation}/></h2></div>);
+
+    mobileBoard = (
+      <div className="row">
+        <div className="teams col-xs-8">
+          <div>
+            <img src={"img/teams/" + away.team.abbreviation + ".png"}/> {away.team.abbreviation} | {away.goals}
+          </div>
+          <div>
+            <img src={"img/teams/" + home.team.abbreviation + ".png"}/> {home.team.abbreviation} | {home.goals}
+          </div>
+        </div>
+        <div className="col-xs-4">
+          <p>{statusString}</p>
+        </div>
+      </div>
+    )
   } else if (statusCode === '1' || statusCode === '2') { //pre-game
     let startTime = new Date(game.gameData.datetime.dateTime);
     let hours = startTime.getHours();
@@ -196,6 +213,22 @@ function Game(props) {
        src={"img/teams/" + home.team.abbreviation + ".png"}
        alt={home.team.abbreviation}/></h2>
      <h3></h3></div>);
+
+     mobileBoard = (
+       <div className="row">
+         <div className="teams col-xs-8">
+           <div>
+             <img src={"img/teams/" + away.team.abbreviation + ".png"}/> {away.team.abbreviation} | {away.goals}
+           </div>
+           <div>
+             <img src={"img/teams/" + home.team.abbreviation + ".png"}/> {home.team.abbreviation} | {home.goals}
+           </div>
+         </div>
+         <div className="col-xs-4">
+           <p>{statusString}</p>
+         </div>
+       </div>
+     )
   } else if (statusString === 'Final') {
     // check who won
     // check if it went to OT
@@ -207,11 +240,30 @@ function Game(props) {
       alt={away.team.abbreviation}/>{away.goals} - {home.goals}<img
       src={"img/teams/" + home.team.abbreviation + ".png"}
       alt={home.team.abbreviation}/></h2></div>);
+
+      mobileBoard = (
+        <div className="row">
+          <div className="teams col-xs-8">
+            <div>
+              <img src={"img/teams/" + away.team.abbreviation + ".png"}/> {away.team.abbreviation} {away.goals}
+            </div>
+            <div>
+              <img src={"img/teams/" + home.team.abbreviation + ".png"}/> {home.team.abbreviation} {home.goals}
+            </div>
+          </div>
+          <div className="status col-xs-4">
+            {statusString}
+          </div>
+        </div>
+      )
   }
 
   return(
-    <div className="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-      <div className="game">
+    <div className="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+      <div className="game visible-xs container">
+        {mobileBoard}
+      </div>
+      <div className="game hidden-xs">
         {boardObject}
         {matchup}
       </div>
