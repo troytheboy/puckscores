@@ -73,22 +73,22 @@ div.game {
       margin-top: 10px;
       color: #ffffff;
       font-family: 'Orbitron', sans-serif; }
-  div.game div.row {
+  div.game div.row div {
     height: 50px; }
-    div.game div.row div.teams {
-      font-family: 'Orbitron', sans-serif;
-      background: #ffffff; }
-      div.game div.row div.teams div {
-        display: inline-block;
-        padding: 10px;
-        text-align: left; }
-        div.game div.row div.teams div img {
-          width: 30px; }
-    div.game div.row div.status {
-      background: #1c2541;
-      color: #5bc0be;
-      font-family: 'Orbitron', sans-serif;
-      padding: 15px; }
+  div.game div.row div.teams {
+    font-family: 'Orbitron', sans-serif;
+    background: #ffffff; }
+    div.game div.row div.teams div {
+      display: inline-block;
+      padding: 10px;
+      text-align: left; }
+      div.game div.row div.teams div img {
+        width: 30px; }
+  div.game div.row div.status {
+    background: #1c2541;
+    color: #5bc0be;
+    font-family: 'Orbitron', sans-serif;
+    padding: 15px; }
 
 .game::after {
   content: '';

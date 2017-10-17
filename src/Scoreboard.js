@@ -180,14 +180,17 @@ function Game(props) {
       <div className="row">
         <div className="teams col-xs-8">
           <div>
-            <img src={"img/teams/" + away.team.abbreviation + ".png"}/> {away.team.abbreviation} | {away.goals}
+            <img src={"img/teams/" + away.team.abbreviation + ".png"}/>
+          </div>
+          <div className="score">
+            {away.goals} - {home.goals}
           </div>
           <div>
-            <img src={"img/teams/" + home.team.abbreviation + ".png"}/> {home.team.abbreviation} | {home.goals}
+            <img src={"img/teams/" + home.team.abbreviation + ".png"}/>
           </div>
         </div>
         <div className="col-xs-4">
-          <p>{statusString}</p>
+          {statusString}
         </div>
       </div>
     )
@@ -218,14 +221,17 @@ function Game(props) {
        <div className="row">
          <div className="teams col-xs-8">
            <div>
-             <img src={"img/teams/" + away.team.abbreviation + ".png"}/> {away.team.abbreviation} | {away.goals}
+             <img src={"img/teams/" + away.team.abbreviation + ".png"}/>
+           </div>
+           <div className="score">
+            VS
            </div>
            <div>
-             <img src={"img/teams/" + home.team.abbreviation + ".png"}/> {home.team.abbreviation} | {home.goals}
+             <img src={"img/teams/" + home.team.abbreviation + ".png"}/>
            </div>
          </div>
-         <div className="col-xs-4">
-           <p>{statusString}</p>
+         <div className="status col-xs-4">
+           {statusString}
          </div>
        </div>
      )
@@ -245,10 +251,13 @@ function Game(props) {
         <div className="row">
           <div className="teams col-xs-8">
             <div>
-              <img src={"img/teams/" + away.team.abbreviation + ".png"}/> {away.team.abbreviation} {away.goals}
+              <img src={"img/teams/" + away.team.abbreviation + ".png"}/>
+            </div>
+            <div className="score">
+              {away.goals} - {home.goals}
             </div>
             <div>
-              <img src={"img/teams/" + home.team.abbreviation + ".png"}/> {home.team.abbreviation} {home.goals}
+              <img src={"img/teams/" + home.team.abbreviation + ".png"}/>
             </div>
           </div>
           <div className="status col-xs-4">

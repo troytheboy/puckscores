@@ -97,7 +97,9 @@ div.game {
     }
   }
   div.row {
-    height: 50px;
+    div {
+      height: 50px;
+    }
     div.teams {
       font-family: 'Orbitron', sans-serif;
       background: $white;
@@ -186,6 +188,11 @@ div.loading {
       h3 {
         margin: 0;
         font-size: 15px;
+      }
+    }
+    div.row {
+      div.teams {
+
       }
     }
   }
