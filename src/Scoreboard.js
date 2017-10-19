@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import 'request'
+import 'request';
 
-const $ = require('jquery')
-const nhlAPI = 'https://statsapi.web.nhl.com/'
+const $ = require('jquery');
+const nhlAPI = 'https://statsapi.web.nhl.com/';
+const calendar = ['January', 'February', 'March', 'April', 'May', 'June',
+ 'July', 'August', 'September', 'October', 'November', 'December'];
+
 
 class Scoreboard extends Component{
   constructor(props) {
@@ -51,7 +54,33 @@ class Scoreboard extends Component{
     $('#loading').show();
     $('.games').hide();
     let startDate = this.stringifyDate(date);
-    let dateString = ((date.getMonth() + 1) + "/" + date.getDate());
+    let dateString = (calendar[date.getMonth()] + " " + date.getDate());
+    let day = '' + date.getDate();
+    switch (day.charAt(day.length -1)) {
+      case '1':
+        if (day === '11') {
+          dateString += 'th';
+        } else {
+          dateString += 'st';
+        }
+        break;
+      case '2':
+        if (day === '12') {
+          dateString += 'th';
+        } else {
+          dateString += 'nd';
+        }
+        break;
+      case '3':
+        if (day === '13') {
+          dateString += 'th';
+        } else {
+          dateString += 'rd';
+        }
+        break;
+      default:
+        dateString += 'th';
+    }
     this.setState({dateString : dateString});
     let tomorrow = date;
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -127,11 +156,11 @@ class Scoreboard extends Component{
         <div className="Scoreboard container">
           <div className="daySelector">
             <div className="row">
-              <div className="col-md-4 col-sm-4 col-xs-4 text-left">
+              <div className="col-md-4 col-sm-4 col-xs-2 text-left">
                 <i className="fa fa-chevron-left" aria-hidden="true" onClick={(e) => this.changeDate(e, -2)}></i>
               </div>
-              <div className="col-md-4 col-sm-4 col-xs-4 text-center">{this.state.dateString}</div>
-              <div className="col-md-4 col-sm-4 col-xs-4 text-right">
+              <div className="col-md-4 col-sm-4 col-xs-8 text-center">{this.state.dateString}</div>
+              <div className="col-md-4 col-sm-4 col-xs-2 text-right">
                 <i className="fa fa-chevron-right" aria-hidden="true" onClick={(e) => this.changeDate(e, 0)}></i>
               </div>
             </div>
@@ -180,16 +209,16 @@ function Game(props) {
       <div className="row">
         <div className="teams col-xs-8">
           <div>
-            <img src={"img/teams/" + away.team.abbreviation + ".png"}/>
+            <img src={"img/teams/" + away.team.abbreviation + ".png"} alt={away.team.abbreviation}/>
           </div>
           <div className="score">
             {away.goals} - {home.goals}
           </div>
           <div>
-            <img src={"img/teams/" + home.team.abbreviation + ".png"}/>
+            <img src={"img/teams/" + home.team.abbreviation + ".png"} alt={home.team.abbreviation}/>
           </div>
         </div>
-        <div className="col-xs-4">
+        <div className="status col-xs-4">
           {statusString}
         </div>
       </div>
@@ -221,13 +250,13 @@ function Game(props) {
        <div className="row">
          <div className="teams col-xs-8">
            <div>
-             <img src={"img/teams/" + away.team.abbreviation + ".png"}/>
+             <img src={"img/teams/" + away.team.abbreviation + ".png"} alt={away.team.abbreviation}/>
            </div>
            <div className="score">
             VS
            </div>
            <div>
-             <img src={"img/teams/" + home.team.abbreviation + ".png"}/>
+             <img src={"img/teams/" + home.team.abbreviation + ".png"} alt={home.team.abbreviation}/>
            </div>
          </div>
          <div className="status col-xs-4">
@@ -251,13 +280,13 @@ function Game(props) {
         <div className="row">
           <div className="teams col-xs-8">
             <div>
-              <img src={"img/teams/" + away.team.abbreviation + ".png"}/>
+              <img src={"img/teams/" + away.team.abbreviation + ".png"} alt={away.team.abbreviation}/>
             </div>
             <div className="score">
               {away.goals} - {home.goals}
             </div>
             <div>
-              <img src={"img/teams/" + home.team.abbreviation + ".png"}/>
+              <img src={"img/teams/" + home.team.abbreviation + ".png"} alt={home.team.abbreviation}/>
             </div>
           </div>
           <div className="status col-xs-4">

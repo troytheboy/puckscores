@@ -10,7 +10,7 @@ $grey: #D3D3D3;
 
 .App {
   text-align: center;
-  background-color: $grey;
+  background: whitesmoke;
   min-height: 100vh;
   height: auto;
 }
@@ -116,7 +116,7 @@ div.game {
       background: $blue;
       color: $cyan;
       font-family: 'Orbitron', sans-serif;
-      padding: 15px;
+      padding: 15px 5px;
     }
   }
 }
