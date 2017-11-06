@@ -16,6 +16,7 @@ class Scoreboard extends Component{
       games : [],
       links : [],
       gameData : [],
+      gameDataMap : new Map(),
       final: [],
       active: []
     };
@@ -35,12 +36,12 @@ class Scoreboard extends Component{
   }
 
   renderGames() {
-    var gamesHTML = [];
+    let gamesHTML = [];
     let gameData = this.state.gameData;
 
     gameData.forEach((game) => {
       if (game !== undefined) {
-        gamesHTML.push(<Game key={game.gamePk} value={game}/>)
+        gamesHTML.push(<Game key={game.gamePk} value={game} id={game.gamePk}/>)
       }
     })
     return gamesHTML;
@@ -50,10 +51,7 @@ class Scoreboard extends Component{
     return (date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
   }
 
-  getGames(date) {
-    $('#loading').show();
-    $('.games').hide();
-    let startDate = this.stringifyDate(date);
+  dateSuffixer(date) {
     let dateString = (calendar[date.getMonth()] + " " + date.getDate());
     let day = '' + date.getDate();
     switch (day.charAt(day.length -1)) {
@@ -82,15 +80,22 @@ class Scoreboard extends Component{
         dateString += 'th';
     }
     this.setState({dateString : dateString});
+  }
+
+  getGames(date) {
+    $('#loading').show();
+    $('.games').hide();
+    let startDate = this.stringifyDate(date);
+    this.dateSuffixer(date);
     let tomorrow = date;
     tomorrow.setDate(tomorrow.getDate() + 1);
     let endDate = this.stringifyDate(tomorrow);
+    let links = [];
 
     $.getJSON(nhlAPI + 'api/v1/schedule/?startDate=' + startDate + '&endDate=' + endDate)
       .then((data) => {
         this.setState({games : data.dates[0].games})
         let games = data.dates[0].games;
-        let links = [];
         games.forEach( (game) => {
           if (game.status.abstractGameState === 'Final') {
             this.state.final.push(game);
@@ -99,13 +104,21 @@ class Scoreboard extends Component{
             this.state.active.push(game);
           }
           links.push(game.link);
-          $.getJSON(nhlAPI + game.link)
+        })
+        this.setState(links : links);
+        this.forceUpdate();
+      })
+      .done((data) => {
+        links.forEach((link) => {
+          $.getJSON(nhlAPI + link)
             .then((data) => {
               let dateTime = data.gameData.datetime.dateTime;
               let gameData = this.state.gameData;
               let length = gameData.length;
+              let gameDataMap = this.state.gameDataMap;
               let i = 0;
               while(i <= length) { // sort games by start time
+                gameDataMap.set(data.gamePk, data);
                 if (length === 0) {
                   gameData.push(data);
                 } else {
@@ -123,7 +136,8 @@ class Scoreboard extends Component{
                 }
                 i++;
               }
-              this.setState({gameData: gameData});
+              console.log(gameDataMap);
+              this.setState({gameData: gameData,gameDataMap: gameDataMap});
             })
             .done((data) => {
               this.forceUpdate () // force render
@@ -133,6 +147,7 @@ class Scoreboard extends Component{
               }, 300)
             })
         })
+
       })
   }
 
@@ -144,6 +159,7 @@ class Scoreboard extends Component{
       games : [],
       links : [],
       gameData : [],
+      gameDataMap : new Map(),
       final : [],
       active : []
     });
@@ -180,19 +196,29 @@ class Scoreboard extends Component{
 }
 
 function Game(props) {
-  let game = props.value;
-  let liveData = game.liveData;
-  let linescore = liveData.linescore;
-  let away = linescore.teams.away;
-  let home = linescore.teams.home;
-  let status = game.gameData.status;
-  let statusCode = status.statusCode;
+  const game = props.value;
+  const liveData = game.liveData;
+  const linescore = liveData.linescore;
+  const away = linescore.teams.away;
+  const home = linescore.teams.home;
+  const status = game.gameData.status;
+  const statusCode = status.statusCode;
   let statusString = status.abstractGameState;
-  let period = linescore.currentPeriodOrdinal;
+  const period = linescore.currentPeriodOrdinal;
   let timeRemaining = linescore.currentPeriodTimeRemaining;
-  let boardObject = (<div className="board"><p>{statusString}</p></div>)
-  let mobileBoard = (<div className="board"><p>{statusString}</p></div>)
-  let matchup = (<div className="matchup"><h3>{away.team.abbreviation} @ {home.team.abbreviation}</h3></div>)
+  let boardObject = (<div className="board"><p>{statusString}</p></div>);
+  let mobileBoard = (<div className="board"><p>{statusString}</p></div>);
+  let matchup = (<div className="matchup"><h3>{away.team.abbreviation} @ {home.team.abbreviation}</h3></div>);
+  const closeSelected =(() => {
+    $('.selectedGame').hide();
+  })
+
+  let gameSelect = (() => {
+    console.log('gameClick', game.gamePk)
+    $('.selectedGame','#' + game.gamePk).show();
+  })
+
+
   if (statusCode >= 3 && statusCode < 5) {
     if (timeRemaining.startsWith('0')) {
       timeRemaining = timeRemaining.slice(1);
@@ -296,14 +322,29 @@ function Game(props) {
       )
   }
 
-  return(
-    <div className="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-      <div className="game visible-xs container">
-        {mobileBoard}
+  let selectedGame = (
+  <div className="selectedGame" onClick={closeSelected}>
+    <div className="gameContent">
+      <h1>{statusString}</h1>
+      <div className="scoreBoard">
+        <img src={"img/teams/" + away.team.abbreviation + ".png"} alt={away.team.abbreviation}/>
+        {away.goals} - {home.goals}
+        <img src={"img/teams/" + home.team.abbreviation + ".png"} alt={home.team.abbreviation}/>
       </div>
-      <div className="game hidden-xs">
-        {boardObject}
-        {matchup}
+    </div>
+  </div>);
+
+  return(
+    <div id={game.gamePk}>
+      {selectedGame}
+      <div className="col-lg-3 col-md-3 col-sm-4 col-xs-12"  onClick={gameSelect}>
+        <div className="game visible-xs container">
+          {mobileBoard}
+        </div>
+        <div className="game hidden-xs">
+          {boardObject}
+          {matchup}
+        </div>
       </div>
     </div>
   )

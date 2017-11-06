@@ -43,13 +43,41 @@ div.daySelector {
   font-family: 'Orbitron', sans-serif;
   margin-top: 10px;
   color: $blue;
-  font-size: 22px;
+  font-size: 26px;
+  padding: 10px;
   div.row {
     text-align: center;
     i {
       cursor: pointer;
     }
   }
+}
+div.selectedGame {
+  display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    div.gameContent {
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+      div.scoreBoard {
+        font-size: 75px;
+        img {
+          height: 75px;
+          margin: 10px;
+        }
+      }
+
+    }
 }
 div.game {
   position: relative;
@@ -70,8 +98,8 @@ div.game {
     p {
       color: $blue;
       font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
       font-size: 22px;
+      font-weight: normal;
       text-align: center;
       margin-top: 5px;
       margin-bottom: 5px;
