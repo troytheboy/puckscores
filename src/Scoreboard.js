@@ -292,7 +292,7 @@ function Game(props) {
       timeRemaining = timeRemaining.slice(1);
     }
     statusString = period + " " + timeRemaining;
-    scoreObject = (<div className="score"><span>{away.goals}</span><span>-</span><span>{home.goals}</span></div>);
+    scoreObject = (<div className="score">{away.goals} - {home.goals}</div>);
     boardObject = (<div className="board"><p>{statusString}</p>
     <h2><img src={"img/teams/" + away.team.abbreviation + ".png"}
      alt={away.team.abbreviation}/>{away.goals} - {home.goals}<img
