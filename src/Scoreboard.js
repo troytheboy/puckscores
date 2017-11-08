@@ -227,7 +227,6 @@ function Game(props) {
   for (let i = 0; i < scoringPlays.length; i++) {
     goals.push(plays[scoringPlays[i]]);
   }
-  console.log(goals);
   const status = game.gameData.status;
   const statusCode = status.statusCode;
   let statusString = status.abstractGameState;
@@ -266,7 +265,6 @@ function Game(props) {
         assists += (" " + name + "(" + players[i].seasonTotal + ')');
       }
     }
-    console.log(players);
     goalsObject.push(
       <div key={goals[i].result.eventCode} className="goal">
         <strong>{goals[i].team.triCode} </strong>
