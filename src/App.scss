@@ -27,9 +27,55 @@ $grey: #D3D3D3;
   color: white;
   margin-bottom: 10px;
   img {
+    z-index: 0;
+    position: relative;
     max-width: 400px;
   }
+  div.links {
+    position: absolute;
+    z-index: 2;
+    span {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 5px;
+      color: $dark_blue;
+      cursor: pointer;
+    }
+    span.active {
+      border-bottom: solid 2px $white;
+    }
+  }
 }
+
+div.standings {
+  display: none;
+  font-family: 'Orbitron', sans-serif;
+  table {
+    margin-left: auto;
+    margin-right: auto;
+    tbody {
+      text-align: left;
+      tr {
+        td {
+          font-size: 18px;
+          padding: 5px;
+        }
+      }
+    }
+    thead {
+      tr {
+        th {
+          cursor: pointer;
+          padding: 5px;
+        }
+      }
+    }
+  }
+}
+// div.scoreboard {
+//   display: none;
+// }
 
 .App-intro {
   font-size: large;

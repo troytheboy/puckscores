@@ -186,7 +186,7 @@ class Scoreboard extends Component{
   render() {
     try {
       return(
-        <div className="Scoreboard container">
+        <div className="scoreboard container" id="scoreboard">
           <div className="daySelector">
             <div className="row">
               <div className="col-md-4 col-sm-3 col-xs-2 text-left">
