@@ -19,7 +19,8 @@ class Scoreboard extends Component{
       gameDataMap : new Map(),
       final: [],
       active: [],
-      standings: {}
+      standings: {},
+      noGames: []
     };
   }
 
@@ -109,9 +110,9 @@ class Scoreboard extends Component{
     tomorrow.setDate(tomorrow.getDate() + 1);
     let endDate = this.stringifyDate(tomorrow);
     let links = [];
-
-    $.getJSON(nhlAPI + 'api/v1/schedule/?startDate=' + startDate + '&endDate=' + endDate)
+    $.getJSON(nhlAPI + 'api/v1/schedule/?startDate=' + startDate + '&endDate=' + startDate)
       .then((data) => {
+        this.setState({noGames: (data.totalGames === 0)});
         this.setState({games : data.dates[0].games})
         let games = data.dates[0].games;
         games.forEach( (game) => {
@@ -123,8 +124,6 @@ class Scoreboard extends Component{
           }
           links.push(game.link);
         })
-        this.setState(links : links);
-        this.forceUpdate();
       })
       .done((data) => {
         links.forEach((link) => {
@@ -156,16 +155,13 @@ class Scoreboard extends Component{
               }
               this.setState({gameData: gameData,gameDataMap: gameDataMap});
             })
-            .done((data) => {
-              this.forceUpdate () // force render
-              setTimeout(function() {
-                $('#loading').hide();
-                $('.games').show();
-              }, 300)
-            })
         })
-
       })
+      this.forceUpdate () // force render
+      setTimeout(() => {
+        $('#loading').hide();
+        $('.games').show();
+      }, 1200);
   }
 
   changeDate(e, modifier) {
@@ -199,6 +195,7 @@ class Scoreboard extends Component{
             </div>
           </div>
           <div className="row games">
+            {this.state.noGames && <h3 className="text-center">Sorry, no games today :(</h3>}
             {this.renderGames()}
           </div>
         </div>

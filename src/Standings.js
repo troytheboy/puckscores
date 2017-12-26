@@ -11,7 +11,10 @@ class Standings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      standings: new Map(),
+      atl: [],
+      met: [],
+      cen: [],
+      pac: [],
       activeTable: (
         <tbody>
           <tr>
@@ -20,50 +23,50 @@ class Standings extends Component {
           </tr>
         </tbody>),
       teams: [],
-      sort: ''
+      sort: '',
+
     }
   }
 
   componentDidMount() {
+    console.log('getStandings')
     this.getStandings();
   }
 
   getStandings() {
     const standingsURL = "api/v1/standings/";
-    let standings = new Map();
     let teams = [];
     $.getJSON(nhlAPI + standingsURL)
       .then((response) => {
-        response.records.forEach((division) => {
-          standings.set(division.division.name, division);
-          division.teamRecords.forEach((team) => {
-            teams.push(team);
-          })
-        })
-        //console.log('before',teams);
-        // teams = teams.sort((team1, team2) => {
-        //   return (team2.points - team1.points);
-        // })
-        //console.log('after',teams);
+        let records = response.records;
         this.setState({
-          standings: standings,
-          teams: teams
-        })
+          atl: records.filter((division) => division.division.name === 'Atlantic')[0].teamRecords,
+          met: records.filter((division) => division.division.name === 'Metropolitan')[0].teamRecords,
+          cen: records.filter((division) => division.division.name === 'Central')[0].teamRecords,
+          pac: records.filter((division) => division.division.name === 'Pacific')[0].teamRecords
+        });
       })
       .done(() =>{
-        this.forceUpdate(); // force render
-        console.log(this.state.teams);
-        this.sortStandings('points');
+        let east = this.state.atl.concat(this.state.met);
+        let west = this.state.cen.concat(this.state.pac);
+        //console.log("east", east)
+        let league = east.concat(west);
+        this.setState({
+          east: east,
+          west: west,
+          league: league
+        });
+        this.sortStandings("points");
       });
   }
 
   constructTables() {
     let divisionTable;
-    let conferanceTable;
+    let conferenceTable;
     let leagueTable = [];
     // leagueTable
     //loop thru every team and add to table
-    this.state.teams.forEach((team) => {
+    this.state.league.forEach((team) => {
       leagueTable.push(<tr key={team.team.name}>
         <td>{team.team.name}</td>
         <td>{team.points}</td>
@@ -80,36 +83,36 @@ class Standings extends Component {
   }
 
   sortStandings(sortBy) {
-    let teams = this.state.teams;
+    let league = this.state.league;
     switch(sortBy) {
-      case 'points':
-        if (this.state.sort === 'points') {
-          teams = teams.sort((team1, team2) => {
+      case "points":
+        if (this.state.sort === "points") {
+          league = league.sort((team1, team2) => {
             return (team1.points - team2.points);
           })
           this.setState({
-              sort: '-points'
+              sort: "-points"
           });
         } else {
           console.log('switch',sortBy);
-          teams = teams.sort((team1, team2) => {
+          league = league.sort((team1, team2) => {
             return (team2.points - team1.points);
           })
           this.setState({
-              sort: 'points'
+              sort: "points"
           });
         }
         break;
       case '%':
         if (this.state.sort === '%') {
-          teams = teams.sort((team1, team2) => {
+          league = league.sort((team1, team2) => {
             return ((team1.points / team1.gamesPlayed) - (team2.points / team2.gamesPlayed));
           })
           this.setState({
-              sort: '-%'
+              sort: "-%"
           });
         } else {
-          teams = teams.sort((team1, team2) => {
+          league = league.sort((team1, team2) => {
             return ((team2.points / team2.gamesPlayed) - (team1.points / team1.gamesPlayed));
           })
           this.setState({
@@ -118,16 +121,16 @@ class Standings extends Component {
         }
         break;
       default:
-        teams = teams.sort((team1, team2) => {
+        league = league.sort((team1, team2) => {
           return (team2.points - team1.points);
         })
         this.setState({
-            sort: 'points'
+            sort: "points"
         });
     }
-    console.log(sortBy, teams[0].team.name);
+    console.log(sortBy, league[0].team.name);
     this.setState({
-      teams: teams
+      league: league
     })
     this.constructTables();
   }
