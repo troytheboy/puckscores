@@ -57,7 +57,8 @@ class Standings extends Component {
         this.setState({
           east: east,
           west: west,
-          league: league
+          league: league,
+          activeTable: null
         });
         this.sortStandings("points");
       });
@@ -78,9 +79,32 @@ class Standings extends Component {
       leagueTable: leagueTable,
       conferenceTables: [eastTable, westTable],
       divisionTables: [atlanticTable, metropolitanTable, centralTable, pacificTable],
-      activeTable: [eastTable, westTable]
     })
-    this.forceUpdate();
+    switch (this.state.activeLabel) {
+      case "league":
+        this.setState({
+          activeTable: leagueTable
+        })
+        break;
+      case "conference":
+        this.setState({
+          activeTable: [eastTable, westTable]
+        })
+        break;
+      case "division":
+        this.setState({
+          activeTable: [atlanticTable, metropolitanTable, centralTable, pacificTable]
+        })
+        break;
+      default:
+        this.setState({
+          activeTable: leagueTable
+        })
+    }
+    if (this.state.activeTable === null) {
+
+    }
+    //this.forceUpdate();
   }
 
   pushTeams(teams, title) {
@@ -88,10 +112,11 @@ class Standings extends Component {
     let tableHeader = (
       <thead>
         <tr key="{title} title">
+          <th className="spacer"></th>
           <th className="title">{title}</th>
         </tr>
         <tr key="{title} legend">
-          <th></th>
+          <th className="spacer"></th>
           <th>Team</th>
           <th onClick={() => this.sortStandings("points")}>Points</th>
           <th onClick={() => this.sortStandings('%')}>Points %</th>
@@ -186,11 +211,12 @@ class Standings extends Component {
       pac: teamDivisions[6]
     })
     this.constructTables();
+    this.forceUpdate();
   }
 
   switchTable(selectedTable) {
-    $("#"+this.state.activeLabel+"-lable").removeClass("activeLabel");
-
+    console.log("remove", this.state.activeLabel + "-label")
+    $("#"+this.state.activeLabel+"-label").removeClass("activeLabel");
     switch (selectedTable) {
       case 'league':
         this.setState({
@@ -217,7 +243,8 @@ class Standings extends Component {
         })
     }
     this.forceUpdate();
-    $("#"+this.state.activeLabel+"-lable").addClass("activeLabel");
+    console.log("add",selectedTable + "-label")
+    $("#"+selectedTable+"-label").addClass("activeLabel");
   }
 
   render() {
@@ -227,7 +254,7 @@ class Standings extends Component {
         <br/>
         <div className=" text-center container tableSelector">
           <div className="row">
-            <div id="league-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-4 selectedTable"
+            <div id="league-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-4 activeLabel"
               onClick={() => this.switchTable("league")}>
               <span>League</span>
             </div>

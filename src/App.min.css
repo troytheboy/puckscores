@@ -43,11 +43,12 @@ div.standings {
       cursor: pointer; }
       div.standings div.tableSelector.container div.row div span {
         font-size: 24px; }
-    div.standings div.tableSelector.container div.row div.selectedTable span {
+    div.standings div.tableSelector.container div.row div.activeLabel span {
       border-bottom: solid #5bc0be 2px; }
   div.standings table {
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    width: 750px; }
     div.standings table tbody {
       text-align: left; }
       div.standings table tbody tr td {
@@ -56,10 +57,12 @@ div.standings {
     div.standings table thead tr th {
       cursor: pointer;
       padding: 5px; }
+    div.standings table thead tr th.spacer {
+      width: 45px; }
     div.standings table thead tr th.title {
       cursor: auto;
       text-transform: capitalize;
-      font-size: 2em; }
+      color: #5bc0be; }
 
 .App-intro {
   font-size: large; }

@@ -62,7 +62,7 @@ div.standings {
           font-size: 24px;
         }
       }
-      div.selectedTable {
+      div.activeLabel {
         span {
           border-bottom: solid $cyan 2px;
         }
@@ -74,6 +74,7 @@ div.standings {
   table {
     margin-left: auto;
     margin-right: auto;
+    width: 750px;
     tbody {
       text-align: left;
       tr {
@@ -89,10 +90,14 @@ div.standings {
           cursor: pointer;
           padding: 5px;
         }
+        th.spacer {
+          width: 45px;
+        }
         th.title {
           cursor: auto;
           text-transform: capitalize;
-          font-size: 2em;
+          //font-size: 30px;
+          color: $cyan;
         }
       }
     }
