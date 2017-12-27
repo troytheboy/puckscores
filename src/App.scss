@@ -51,6 +51,26 @@ $grey: #D3D3D3;
 div.standings {
   display: none;
   font-family: 'Orbitron', sans-serif;
+  div.tableSelector.container {
+    div.row {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 600px;
+      div {
+        cursor: pointer;
+        span {
+          font-size: 24px;
+        }
+      }
+      div.selectedTable {
+        span {
+          border-bottom: solid $cyan 2px;
+        }
+        //background-color: $cyan;
+      }
+    }
+  }
+
   table {
     margin-left: auto;
     margin-right: auto;
@@ -73,10 +93,6 @@ div.standings {
     }
   }
 }
-// div.scoreboard {
-//   display: none;
-// }
-
 .App-intro {
   font-size: large;
 }

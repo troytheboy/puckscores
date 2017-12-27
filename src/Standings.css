@@ -1,0 +1,93 @@
+/*
+Error: Invalid CSS after "(": expected ")", was ""
+        on line 18 of src/Standings.js
+
+13:     this.state = {
+14:       atl: [],
+15:       met: [],
+16:       cen: [],
+17:       pac: [],
+18:       activeTable: (
+19:         <tbody>
+20:           <tr>
+21:             <td>Loading...</td>
+22:             <td>Loading...</td>
+23:           </tr>
+
+Backtrace:
+src/Standings.js:18
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/scss/parser.rb:1278:in `expected'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/lexer.rb:231:in `expected!'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:731:in `assert_tok'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:667:in `paren'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:619:in `square_list'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:606:in `special_fun'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:600:in `raw'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:519:in `funcall'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:500:in `ident'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:291:in `unary_not'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:291:in `unary_div'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:291:in `unary_minus'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:291:in `unary_plus'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:272:in `times_div_or_mod'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:272:in `plus_or_minus'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:272:in `relational'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:272:in `eq_or_neq'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:272:in `and_expr'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:272:in `or_expr'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:474:in `space'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:415:in `interpolation'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:339:in `expr'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:722:in `assert_expr'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:68:in `parse'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:228:in `parse'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script.rb:27:in `parse'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:1177:in `parse_script'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:749:in `parse_property'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:708:in `parse_property_or_rule'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:667:in `parse_line'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:540:in `build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:559:in `block in append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:549:in `block in build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:559:in `block in append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:549:in `block in build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:559:in `block in append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:549:in `block in build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:559:in `block in append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:417:in `_to_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:294:in `watch'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin.rb:109:in `method_missing'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:360:in `watch_or_update'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:51:in `process_result'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/base.rb:52:in `parse'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/base.rb:19:in `parse!'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/bin/sass:13:in `<top (required)>'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/sass:23:in `load'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/sass:23:in `<main>'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/ruby_executable_hooks:15:in `eval'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/ruby_executable_hooks:15:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"(\": expected \")\", was \"\"\A         on line 18 of src/Standings.js\A \A 13:     this.state = {\A 14:       atl: [],\A 15:       met: [],\A 16:       cen: [],\A 17:       pac: [],\A 18:       activeTable: (\A 19:         <tbody>\A 20:           <tr>\A 21:             <td>Loading...</td>\A 22:             <td>Loading...</td>\A 23:           </tr>"; }

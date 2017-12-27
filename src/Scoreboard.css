@@ -1,0 +1,73 @@
+/*
+Error: Invalid CSS after "": expected expression (e.g. 1px, bold), was "{},"
+        on line 22 of src/Scoreboard.js
+
+17:       links : [],
+18:       gameData : [],
+19:       gameDataMap : new Map(),
+20:       final: [],
+21:       active: [],
+22:       standings: {},
+23:       noGames: []
+24:     };
+25:   }
+26: 
+27:   componentDidMount() {
+
+Backtrace:
+src/Scoreboard.js:22
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/scss/parser.rb:1278:in `expected'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/lexer.rb:231:in `expected!'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:724:in `assert_expr'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:68:in `parse'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script/parser.rb:228:in `parse'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/script.rb:27:in `parse'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:1177:in `parse_script'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:749:in `parse_property'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:708:in `parse_property_or_rule'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:667:in `parse_line'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:540:in `build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:559:in `block in append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:549:in `block in build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:559:in `block in append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:549:in `block in build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:559:in `block in append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:549:in `block in build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:542:in `build_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:559:in `block in append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:558:in `append_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:417:in `_to_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:294:in `watch'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin.rb:109:in `method_missing'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:360:in `watch_or_update'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:51:in `process_result'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/base.rb:52:in `parse'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/base.rb:19:in `parse!'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/bin/sass:13:in `<top (required)>'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/sass:23:in `load'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/sass:23:in `<main>'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/ruby_executable_hooks:15:in `eval'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/ruby_executable_hooks:15:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"\": expected expression (e.g. 1px, bold), was \"{},\"\A         on line 22 of src/Scoreboard.js\A \A 17:       links : [],\A 18:       gameData : [],\A 19:       gameDataMap : new Map(),\A 20:       final: [],\A 21:       active: [],\A 22:       standings: {},\A 23:       noGames: []\A 24:     };\A 25:   }\A 26: \A 27:   componentDidMount() {"; }

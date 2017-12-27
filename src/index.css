@@ -1,0 +1,58 @@
+/*
+Error: Invalid CSS after "import React from ": expected selector, was "'react';"
+        on line 1 of src/index.js
+
+1: import React from 'react';
+2: import ReactDOM from 'react-dom';
+3: import App from './App';
+4: import './App.min.css';
+5: import './bootstrap/dist/css/bootstrap.min.css';
+6: import './font-awesome/css/font-awesome.min.css';
+
+Backtrace:
+src/index.js:1
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/scss/parser.rb:1278:in `expected'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/scss/parser.rb:1208:in `expected'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/scss/static_parser.rb:21:in `parse_selector'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:438:in `visit_rule'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/stack.rb:79:in `block in with_base'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/stack.rb:135:in `with_frame'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/stack.rb:79:in `with_base'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:162:in `visit'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:161:in `visit'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:10:in `visit'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:294:in `watch'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/plugin.rb:109:in `method_missing'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:360:in `watch_or_update'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:51:in `process_result'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/base.rb:52:in `parse'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/lib/sass/exec/base.rb:19:in `parse!'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/gems/sass-3.5.3/bin/sass:13:in `<top (required)>'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/sass:23:in `load'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/sass:23:in `<main>'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/ruby_executable_hooks:15:in `eval'
+/Users/troybarnard/.rvm/gems/ruby-2.4.1/bin/ruby_executable_hooks:15:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"import React from \": expected selector, was \"'react';\"\A         on line 1 of src/index.js\A \A 1: import React from 'react';\A 2: import ReactDOM from 'react-dom';\A 3: import App from './App';\A 4: import './App.min.css';\A 5: import './bootstrap/dist/css/bootstrap.min.css';\A 6: import './font-awesome/css/font-awesome.min.css';"; }

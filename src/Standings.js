@@ -66,8 +66,10 @@ class Standings extends Component {
     let leagueTable = [];
     // leagueTable
     //loop thru every team and add to table
+    let place = 0;
     this.state.league.forEach((team) => {
       leagueTable.push(<tr key={team.team.name}>
+        <td>{++place}</td>
         <td>{team.team.name}</td>
         <td>{team.points}</td>
         <td>{(team.points / (team.gamesPlayed * 2)).toFixed(2)}</td>
@@ -139,9 +141,25 @@ class Standings extends Component {
     return(
       <div className="standings" id="standings">
         <h1>Standings</h1>
+        <br/>
+        <div className=" text-center container tableSelector">
+          <div className="row">
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4 selectedTable">
+              <span>League</span>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <span>Conference</span>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <span>Division</span>
+            </div>
+          </div>
+        </div>
+        <br/>
         <table>
           <thead>
             <tr>
+              <th></th>
               <th>Team</th>
               <th onClick={() => this.sortStandings('points')}>Points</th>
               <th onClick={() => this.sortStandings('%')}>Points %</th>
