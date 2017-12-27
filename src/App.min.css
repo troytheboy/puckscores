@@ -56,6 +56,10 @@ div.standings {
     div.standings table thead tr th {
       cursor: pointer;
       padding: 5px; }
+    div.standings table thead tr th.title {
+      cursor: auto;
+      text-transform: capitalize;
+      font-size: 2em; }
 
 .App-intro {
   font-size: large; }

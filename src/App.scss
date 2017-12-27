@@ -89,6 +89,11 @@ div.standings {
           cursor: pointer;
           padding: 5px;
         }
+        th.title {
+          cursor: auto;
+          text-transform: capitalize;
+          font-size: 2em;
+        }
       }
     }
   }
