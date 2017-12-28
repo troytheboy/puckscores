@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
 import 'request';
 
 const $ = require('jquery');
 const nhlAPI = 'https://statsapi.web.nhl.com/';
+const abbreviations = require('../json/abbreviations.json');
 
 
 class Standings extends Component {
@@ -52,7 +52,6 @@ class Standings extends Component {
       .done(() =>{
         let east = this.state.atl.concat(this.state.met);
         let west = this.state.cen.concat(this.state.pac);
-        //console.log("east", east)
         let league = east.concat(west);
         this.setState({
           east: east,
@@ -61,6 +60,7 @@ class Standings extends Component {
           activeTable: null
         });
         this.sortStandings("points");
+        this.forceUpdate();
       });
   }
 
@@ -104,7 +104,7 @@ class Standings extends Component {
     if (this.state.activeTable === null) {
 
     }
-    //this.forceUpdate();
+    this.forceUpdate();
   }
 
   pushTeams(teams, title) {
@@ -120,24 +120,26 @@ class Standings extends Component {
           <th>Team</th>
           <th onClick={() => this.sortStandings("points")}>Points</th>
           <th onClick={() => this.sortStandings('%')}>Points %</th>
-          <th>Record</th>
+          <th className="hidden-mobile">Record</th>
         </tr>
       </thead>
     )
     let place = 0;
     teams.forEach((team) => {
+      console.log(team.team.name, abbreviations[team.team.name]);
       tableBody.push(
         <tr key={team.team.name}>
           <td>{++place}</td>
-          <td>{team.team.name}</td>
+          <td className="hidden-sm hidden-xs">{team.team.name}</td>
+          <td className="visible-sm-* visible-xs-* hidden-md hidden-lg hidden-xl">{abbreviations[team.team.name]}</td>
           <td>{team.points}</td>
-          <td>{(team.points / (team.gamesPlayed * 2)).toFixed(2)}</td>
-          <td>{team.leagueRecord.wins}-{team.leagueRecord.losses}-{team.leagueRecord.ot}</td>
+          <td>{Math.round((team.points / (team.gamesPlayed * 2)) * 100)} %</td>
+          <td className="hidden-mobile">{team.leagueRecord.wins}-{team.leagueRecord.losses}-{team.leagueRecord.ot}</td>
         </tr>
       )
     })
     return (
-      <table key={Math.random() + "-" + title}>
+      <table key={Math.random() + "-" + title} className="table table-striped">
         {tableHeader}
         <tbody>{tableBody}</tbody>
       </table>
@@ -254,15 +256,15 @@ class Standings extends Component {
         <br/>
         <div className=" text-center container tableSelector">
           <div className="row">
-            <div id="league-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-4 activeLabel"
+            <div id="league-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-3 activeLabel"
               onClick={() => this.switchTable("league")}>
               <span>League</span>
             </div>
-            <div id="conference-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-4"
+            <div id="conference-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-6 text-center"
               onClick={() => this.switchTable("conference")}>
               <span>Conference</span>
             </div>
-            <div id="division-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-4"
+            <div id="division-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-3"
               onClick={() => this.switchTable("division")}>
               <span>Division</span>
             </div>

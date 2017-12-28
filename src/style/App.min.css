@@ -34,7 +34,8 @@
 
 div.standings {
   display: none;
-  font-family: 'Orbitron', sans-serif; }
+  font-family: 'Orbitron', sans-serif;
+  padding-bottom: 15px; }
   div.standings div.tableSelector.container div.row {
     margin-left: auto;
     margin-right: auto;
@@ -48,7 +49,7 @@ div.standings {
   div.standings table {
     margin-left: auto;
     margin-right: auto;
-    width: 750px; }
+    width: 700px; }
     div.standings table tbody {
       text-align: left; }
       div.standings table tbody tr td {
@@ -62,6 +63,7 @@ div.standings {
     div.standings table thead tr th.title {
       cursor: auto;
       text-transform: capitalize;
+      font-size: 30px;
       color: #5bc0be; }
 
 .App-intro {
@@ -242,6 +244,9 @@ div.loading img {
       margin-left: 5px;
       margin-right: 5px; } }
 @media only screen and (max-width: 992px) {
+  div.standings table {
+    width: 600px; }
+
   div.selectedGame div.gameContent {
     width: 600px; }
     div.selectedGame div.gameContent div.gameInfo {
@@ -270,12 +275,17 @@ div.loading img {
       padding: 0;
       width: 450px; } }
 @media only screen and (max-width: 500px) {
+  div.standings h1 {
+    font-size: 26px; }
+  div.standings div.tableSelector.container div.row div span {
+    font-size: 16px; }
+
   div.loading img {
     width: 100px; }
 
   .App-header {
     background-color: #5bc0be;
-    height: 100px;
+    height: 120px;
     padding: 20px;
     color: white;
     margin-bottom: 10px; }
@@ -316,6 +326,9 @@ div.loading img {
     div.selectedGame div.gameContent div.gameInfo div.row div p {
       font-size: 10px; } }
 @media only screen and (max-width: 375px) {
+  .hidden-mobile {
+    display: none; }
+
   .game div.board {
     height: 75px; }
     .game div.board p {

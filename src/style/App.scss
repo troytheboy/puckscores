@@ -51,6 +51,7 @@ $grey: #D3D3D3;
 div.standings {
   display: none;
   font-family: 'Orbitron', sans-serif;
+  padding-bottom: 15px;
   div.tableSelector.container {
     div.row {
       margin-left: auto;
@@ -66,15 +67,13 @@ div.standings {
         span {
           border-bottom: solid $cyan 2px;
         }
-        //background-color: $cyan;
       }
     }
   }
-
   table {
     margin-left: auto;
     margin-right: auto;
-    width: 750px;
+    width: 700px;
     tbody {
       text-align: left;
       tr {
@@ -96,7 +95,7 @@ div.standings {
         th.title {
           cursor: auto;
           text-transform: capitalize;
-          //font-size: 30px;
+          font-size: 30px;
           color: $cyan;
         }
       }
@@ -319,6 +318,11 @@ div.loading {
     }
 }
 @media only screen and (max-width: 992px) {
+  div.standings {
+    table {
+      width: 600px;
+    }
+  }
   div.selectedGame {
     div.gameContent {
       width: 600px;
@@ -374,6 +378,20 @@ div.loading {
   }
 }
 @media only screen and (max-width: 500px) {
+  div.standings {
+    h1 {
+      font-size: 26px;
+    }
+    div.tableSelector.container {
+      div.row {
+        div {
+          span {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
   div.loading {
     img {
       width: 100px;
@@ -381,7 +399,7 @@ div.loading {
   }
   .App-header {
     background-color: $cyan;
-    height: 100px;
+    height: 120px;
     padding: 20px;
     color: white;
     margin-bottom: 10px;
@@ -461,6 +479,9 @@ div.loading {
 }
 
 @media only screen and (max-width: 375px) {
+  .hidden-mobile {
+    display: none;
+  }
   .game {
     div.board {
       height: 75px;
