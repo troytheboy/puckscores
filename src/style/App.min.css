@@ -53,8 +53,7 @@ div.standings {
     div.standings table tbody {
       text-align: left; }
       div.standings table tbody tr td {
-        font-size: 18px;
-        padding: 5px; }
+        font-size: 18px; }
     div.standings table thead tr th {
       cursor: pointer;
       padding: 5px; }
@@ -64,7 +63,9 @@ div.standings {
       cursor: auto;
       text-transform: capitalize;
       font-size: 30px;
-      color: #5bc0be; }
+      color: #5bc0be;
+      width: 340px;
+      overflow: visible; }
 
 .App-intro {
   font-size: large; }
@@ -245,7 +246,11 @@ div.loading img {
       margin-right: 5px; } }
 @media only screen and (max-width: 992px) {
   div.standings table {
+    padding: 20px;
     width: 600px; }
+    div.standings table thead tr th.title {
+      max-width: 100px;
+      overflow: visible; }
 
   div.selectedGame div.gameContent {
     width: 600px; }
@@ -277,6 +282,11 @@ div.loading img {
 @media only screen and (max-width: 500px) {
   div.standings h1 {
     font-size: 26px; }
+  div.standings table thead tr th {
+    max-width: 50px;
+    overflow: visible; }
+  div.standings table tbody tr td {
+    padding: 10px; }
   div.standings div.tableSelector.container div.row div span {
     font-size: 16px; }
 

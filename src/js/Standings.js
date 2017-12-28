@@ -256,15 +256,15 @@ class Standings extends Component {
         <br/>
         <div className=" text-center container tableSelector">
           <div className="row">
-            <div id="league-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-3 activeLabel"
+            <div id="league-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-12 activeLabel"
               onClick={() => this.switchTable("league")}>
               <span>League</span>
             </div>
-            <div id="conference-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-6 text-center"
+            <div id="conference-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center"
               onClick={() => this.switchTable("conference")}>
               <span>Conference</span>
             </div>
-            <div id="division-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-3"
+            <div id="division-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-12"
               onClick={() => this.switchTable("division")}>
               <span>Division</span>
             </div>

@@ -79,7 +79,6 @@ div.standings {
       tr {
         td {
           font-size: 18px;
-          padding: 5px;
         }
       }
     }
@@ -97,6 +96,8 @@ div.standings {
           text-transform: capitalize;
           font-size: 30px;
           color: $cyan;
+          width: 340px;
+          overflow: visible;
         }
       }
     }
@@ -320,7 +321,16 @@ div.loading {
 @media only screen and (max-width: 992px) {
   div.standings {
     table {
+      padding: 20px;
       width: 600px;
+      thead {
+        tr {
+          th.title {
+            max-width: 100px;
+            overflow: visible;
+          }
+        }
+      }
     }
   }
   div.selectedGame {
@@ -381,6 +391,23 @@ div.loading {
   div.standings {
     h1 {
       font-size: 26px;
+    }
+    table {
+      thead {
+        tr {
+          th {
+            max-width: 50px;
+            overflow: visible;
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            padding: 10px;
+          }
+        }
+      }
     }
     div.tableSelector.container {
       div.row {
