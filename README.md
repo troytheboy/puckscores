@@ -2,7 +2,7 @@
 
 # About
 
-PuckScores is a web app made with React.JS that uses the NHL's API to display live scores and standings.
+PuckScores is a web app made with [React.JS](https://reactjs.org/) that uses the NHL's API to display live scores and standings.
 
 # Scores
 
