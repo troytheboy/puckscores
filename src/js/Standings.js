@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
-import 'request';
+import React, { Component } from 'react'
+import 'request'
 
-const $ = require('jquery');
-const nhlAPI = 'https://statsapi.web.nhl.com/';
-const abbreviations = require('../json/abbreviations.json');
-
+const $ = require('jquery')
+const nhlAPI = 'https://statsapi.web.nhl.com/'
+const abbreviations = require('../json/abbreviations.json')
 
 class Standings extends Component {
-
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       atl: [],
       met: [],
@@ -20,188 +18,178 @@ class Standings extends Component {
           <tbody>
             <tr>
               <td>Loading...</td>
-              <td>Loading...</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
       ),
-      activeLabel: "league",
+      activeLabel: 'league',
       teams: [],
-      sort: '',
-
+      sort: ''
     }
   }
 
-  componentDidMount() {
-    this.getStandings();
+  componentDidMount () {
+    this.getStandings()
   }
 
-  getStandings() {
-    const standingsURL = "api/v1/standings/";
-    let teams = [];
-    $.getJSON(nhlAPI + standingsURL)
-      .then((response) => {
-        let records = response.records;
-        this.setState({
-          atl: records.filter((division) => division.division.name === 'Atlantic')[0].teamRecords,
-          met: records.filter((division) => division.division.name === 'Metropolitan')[0].teamRecords,
-          cen: records.filter((division) => division.division.name === 'Central')[0].teamRecords,
-          pac: records.filter((division) => division.division.name === 'Pacific')[0].teamRecords
-        });
+  getStandings () {
+    const standingsURL = 'api/v1/standings/'
+    $.getJSON(nhlAPI + standingsURL).then((response) => {
+      let records = response.records
+      this.setState({
+        atl: records.filter((division) => division.division.name ===
+          'Atlantic')[0].teamRecords,
+        met: records.filter((division) => division.division.name ===
+          'Metropolitan')[0].teamRecords,
+        cen: records.filter((division) => division.division.name ===
+          'Central')[0].teamRecords,
+        pac: records.filter((division) => division.division.name ===
+          'Pacific')[0].teamRecords
       })
-      .done(() =>{
-        let east = this.state.atl.concat(this.state.met);
-        let west = this.state.cen.concat(this.state.pac);
-        let league = east.concat(west);
-        this.setState({
-          east: east,
-          west: west,
-          league: league,
-          activeTable: null
-        });
-        this.sortStandings("points");
-        this.forceUpdate();
-      });
+    }).done(() => {
+      let east = this.state.atl.concat(this.state.met)
+      let west = this.state.cen.concat(this.state.pac)
+      let league = east.concat(west)
+      this.setState({east: east, west: west, league: league, activeTable: null})
+      this.sortStandings('points')
+      this.forceUpdate()
+    })
   }
 
-  constructTables() {
+  constructTables () {
     // leagueTable
-    let leagueTable = this.pushTeams(this.state.league, "");
+    let leagueTable = this.pushTeams(this.state.league, '')
     // conferanceTable
-    let eastTable = this.pushTeams(this.state.east, "east");
-    let westTable = this.pushTeams(this.state.west, "west");
+    let eastTable = this.pushTeams(this.state.east, 'east')
+    let westTable = this.pushTeams(this.state.west, 'west')
     // divisionTable
-    let atlanticTable = this.pushTeams(this.state.atl, "atlantic");
-    let metropolitanTable = this.pushTeams(this.state.met, "metropolitan");
-    let centralTable = this.pushTeams(this.state.cen, "central");
-    let pacificTable = this.pushTeams(this.state.pac, "pacific");
+    let atlanticTable = this.pushTeams(this.state.atl, 'atlantic')
+    let metropolitanTable = this.pushTeams(this.state.met, 'metropolitan')
+    let centralTable = this.pushTeams(this.state.cen, 'central')
+    let pacificTable = this.pushTeams(this.state.pac, 'pacific')
     this.setState({
       leagueTable: leagueTable,
-      conferenceTables: [eastTable, westTable],
-      divisionTables: [atlanticTable, metropolitanTable, centralTable, pacificTable],
+      conferenceTables: [
+        eastTable, westTable
+      ],
+      divisionTables: [atlanticTable, metropolitanTable, centralTable,
+        pacificTable]
     })
     switch (this.state.activeLabel) {
-      case "league":
-        this.setState({
-          activeTable: leagueTable
-        })
-        break;
-      case "conference":
+      case 'league':
+        this.setState({activeTable: leagueTable})
+        break
+      case 'conference':
         this.setState({
           activeTable: [eastTable, westTable]
         })
-        break;
-      case "division":
+        break
+      case 'division':
         this.setState({
-          activeTable: [atlanticTable, metropolitanTable, centralTable, pacificTable]
+          activeTable: [atlanticTable, metropolitanTable,
+            centralTable, pacificTable]
         })
-        break;
+        break
       default:
-        this.setState({
-          activeTable: leagueTable
-        })
+        this.setState({activeTable: leagueTable})
     }
-    if (this.state.activeTable === null) {
-
-    }
-    this.forceUpdate();
+    if (this.state.activeTable === null) {}
+    this.forceUpdate()
   }
 
-  pushTeams(teams, title) {
-    let tableBody = [];
+  pushTeams (teams, title) {
+    let tableBody = []
     let tableHeader = (
       <thead>
-        <tr key="{title} title">
-          <th className="spacer"></th>
-          <th className="title">{title}</th>
+        <tr key={title + '-title'}>
+          <th className='spacer'></th>
+          <th className='title'>{title}</th>
         </tr>
-        <tr key="{title} legend">
-          <th className="spacer"></th>
+        <tr key={title + '-legend'}>
+          <th className='spacer'></th>
           <th>Team</th>
-          <th onClick={() => this.sortStandings("points")}>Points</th>
+          <th onClick={() => this.sortStandings('points')}>Points</th>
           <th onClick={() => this.sortStandings('%')}>Points %</th>
-          <th className="hidden-mobile">Record</th>
+          <th className='hidden-mobile'>Record</th>
         </tr>
       </thead>
     )
-    let place = 0;
+    let place = 0
     teams.forEach((team) => {
-      console.log(team.team.name, abbreviations[team.team.name]);
+      console.log(team.team.name, abbreviations[team.team.name])
       tableBody.push(
         <tr key={team.team.name}>
           <td>{++place}</td>
-          <td className="hidden-sm hidden-xs">{team.team.name}</td>
-          <td className="visible-sm-* visible-xs-* hidden-md hidden-lg hidden-xl">{abbreviations[team.team.name]}</td>
+          <td className='hidden-sm hidden-xs'>{team.team.name}</td>
+          <td className='visible-sm-* visible-xs-* hidden-md hidden-lg hidden-xl'>{abbreviations[team.team.name]}</td>
           <td>{team.points}</td>
-          <td>{Math.round((team.points / (team.gamesPlayed * 2)) * 100)} %</td>
-          <td className="hidden-mobile">{team.leagueRecord.wins}-{team.leagueRecord.losses}-{team.leagueRecord.ot}</td>
+          <td>{Math.round((team.points / (team.gamesPlayed * 2)) * 100)}
+            %</td>
+          <td className='hidden-mobile'>{team.leagueRecord.wins}-{team.leagueRecord.losses}-{team.leagueRecord.ot}</td>
         </tr>
       )
     })
     return (
-      <table key={Math.random() + "-" + title} className="table table-striped">
+      <table key={Math.random() + '-' + title} className='table table-striped'>
         {tableHeader}
         <tbody>{tableBody}</tbody>
       </table>
-    );
+    )
   }
 
-  sortStandings(sortBy) {
-    let league = this.state.league;
-    let teamDivisions = [this.state.league, this.state.east, this.state.west,
-       this.state.atl, this.state.met, this.state.cen, this.state.pac];
-    switch(sortBy) {
-      case "points":
-        if (this.state.sort === "points") {
+  sortStandings (sortBy) {
+    let teamDivisions = [
+      this.state.league,
+      this.state.east,
+      this.state.west,
+      this.state.atl,
+      this.state.met,
+      this.state.cen,
+      this.state.pac
+    ]
+    switch (sortBy) {
+      case 'points':
+        if (this.state.sort === 'points') {
           for (let i = 0; i < teamDivisions.length; i++) {
             teamDivisions[i] = teamDivisions[i].sort((a, b) => {
-              return (a.points - b.points);
+              return (a.points - b.points)
             })
           }
-          this.setState({
-              sort: "-points"
-          });
+          this.setState({sort: '-points'})
         } else {
           for (let i = 0; i < teamDivisions.length; i++) {
             teamDivisions[i] = teamDivisions[i].sort((a, b) => {
-              return (b.points - a.points);
+              return (b.points - a.points)
             })
           }
-          this.setState({
-              sort: "points"
-          });
+          this.setState({sort: 'points'})
         }
-        break;
+        break
       case '%':
         if (this.state.sort === '%') {
           for (let i = 0; i < teamDivisions.length; i++) {
             teamDivisions[i] = teamDivisions[i].sort((a, b) => {
-              return (a.points / a.gamesPlayed - b.points / b.gamesPlayed);
+              return (a.points / a.gamesPlayed - b.points / b.gamesPlayed)
             })
           }
-          this.setState({
-              sort: "-%"
-          });
+          this.setState({sort: '-%'})
         } else {
           for (let i = 0; i < teamDivisions.length; i++) {
             teamDivisions[i] = teamDivisions[i].sort((a, b) => {
-              return (b.points / b.gamesPlayed - a.points / a.gamesPlayed);
+              return (b.points / b.gamesPlayed - a.points / a.gamesPlayed)
             })
           }
-          this.setState({
-              sort: '%'
-          });
+          this.setState({sort: '%'})
         }
-        break;
+        break
       default:
-      for (let i = 0; i < teamDivisions.length; i++) {
-        teamDivisions[i] = teamDivisions[i].sort((a, b) => {
-          return (b.points - a.points);
-        })
-      }
-        this.setState({
-            sort: "points"
-        });
+        for (let i = 0; i < teamDivisions.length; i++) {
+          teamDivisions[i] = teamDivisions[i].sort((a, b) => {
+            return (b.points - a.points)
+          })
+        }
+        this.setState({sort: 'points'})
     }
     this.setState({
       league: teamDivisions[0],
@@ -212,69 +200,62 @@ class Standings extends Component {
       cen: teamDivisions[5],
       pac: teamDivisions[6]
     })
-    this.constructTables();
-    this.forceUpdate();
+    this.constructTables()
+    this.forceUpdate()
   }
 
-  switchTable(selectedTable) {
-    console.log("remove", this.state.activeLabel + "-label")
-    $("#"+this.state.activeLabel+"-label").removeClass("activeLabel");
+  switchTable (selectedTable) {
+    console.log('remove', this.state.activeLabel + '-label')
+    $('#' + this.state.activeLabel + '-label').removeClass('activeLabel')
     switch (selectedTable) {
       case 'league':
-        this.setState({
-          activeTable: this.state.leagueTable,
-          activeLabel: "league"
-        })
-        break;
+        this.setState({activeTable: this.state.leagueTable,
+          activeLabel: 'league'})
+        break
       case 'conference':
-        this.setState({
-          activeTable: this.state.conferenceTables,
-          activeLabel: "conference"
-        })
-        break;
+        this.setState({activeTable: this.state.conferenceTables,
+          activeLabel: 'conference'})
+        break
       case 'division':
-        this.setState({
-          activeTable: this.state.divisionTables,
-          activeLabel: "division"
-        })
-        break;
+        this.setState({activeTable: this.state.divisionTables,
+          activeLabel: 'division'})
+        break
       default:
-        this.setState({
-          activeTable: this.state.leagueTables,
-          activeLabel: "league"
-        })
+        this.setState({activeTable: this.state.leagueTables,
+          activeLabel: 'league'})
     }
-    this.forceUpdate();
-    console.log("add",selectedTable + "-label")
-    $("#"+selectedTable+"-label").addClass("activeLabel");
+    this.forceUpdate()
+    $('#' + selectedTable + '-label').addClass('activeLabel')
   }
 
-  render() {
-    return(
-      <div className="standings" id="standings">
+  render () {
+    return (
+      <div className='standings' id='standings'>
         <h1>Standings</h1>
         <br/>
-        <div className=" text-center container tableSelector">
-          <div className="row">
-            <div id="league-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-12 activeLabel"
-              onClick={() => this.switchTable("league")}>
+        <div className=' text-center container tableSelector'>
+          <div className='row'>
+            <div id='league-label'
+              className='col-lg-4 col-md-4 col-sm-4 col-xs-12 activeLabel'
+              onClick={() => this.switchTable('league')}>
               <span>League</span>
             </div>
-            <div id="conference-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center"
-              onClick={() => this.switchTable("conference")}>
+            <div id='conference-label'
+              className='col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center'
+              onClick={() => this.switchTable('conference')}>
               <span>Conference</span>
             </div>
-            <div id="division-label" className="col-lg-4 col-md-4 col-sm-4 col-xs-12"
-              onClick={() => this.switchTable("division")}>
+            <div id='division-label'
+              className='col-lg-4 col-md-4 col-sm-4 col-xs-12'
+              onClick={() => this.switchTable('division')}>
               <span>Division</span>
             </div>
           </div>
         </div>
-        <br/>
-        {this.state.activeTable}
+        <br/> {this.state.activeTable}
       </div>
     )
   }
 }
 
-export default Standings;
+export default Standings
