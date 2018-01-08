@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.0.0-beta.3",
     "jquery": "^3.2.1",
     "node-sass": "^4.5.3",
     "react": "^15.6.1",
@@ -17,6 +17,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-standard": "^3.0.1",
     "standard": "^10.0.3"
   },
@@ -25,6 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "eslint": "node_modules/.bin/eslint"
+    "eslint": "node_modules/.bin/eslint",
+    "sass": "sass --watch src/style/App.scss:src/style/App.min.css --style compressed"
   }
 }

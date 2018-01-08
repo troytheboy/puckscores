@@ -179,8 +179,8 @@ class Scoreboard extends Component {
   render () {
     try {
       return (
-        <div className='scoreboard container' id='scoreboard'>
-          <div className='daySelector'>
+        <div className='scoreboard' id='scoreboard'>
+          <div className='daySelector container'>
             <div className='row'>
               <div className='col-md-4 col-sm-3 col-xs-2 text-left'>
                 <i className='fa fa-chevron-left' aria-hidden='true' onClick={(e) => this.changeDate(e, -2)}></i>
@@ -191,9 +191,11 @@ class Scoreboard extends Component {
               </div>
             </div>
           </div>
-          <div className='row games'>
-            {this.state.noGames && <h3 className='text-center'>Sorry, no games today :(</h3>}
-            {this.renderGames()}
+          <div className='container'>
+            <div className='row games'>
+              {this.state.noGames && <h3 className='text-center'>Sorry, no games today :(</h3>}
+              {this.renderGames()}
+            </div>
           </div>
         </div>
       )
@@ -439,9 +441,9 @@ function Game (props) {
   )
 
   return (
-    <div id={game.gamePk}>
+    <div id={game.gamePk} className='col-lg-3 col-md-4'>
       {selectedGame}
-      <div className='col-lg-3 col-md-3 col-sm-4 col-xs-12' onClick={gameSelect}>
+      <div onClick={gameSelect}>
         <div className='game visible-xs container'>
           {mobileBoard}
         </div>
