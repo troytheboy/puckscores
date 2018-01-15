@@ -59,7 +59,7 @@ class Standings extends Component {
 
   constructTables () {
     // leagueTable
-    let leagueTable = this.pushTeams(this.state.league, '')
+    let leagueTable = this.pushTeams(this.state.league, 'NHL')
     // conferanceTable
     let eastTable = this.pushTeams(this.state.east, 'east')
     let westTable = this.pushTeams(this.state.west, 'west')
@@ -102,7 +102,7 @@ class Standings extends Component {
     let tableBody = []
     let tableHeader = (
       <thead>
-        <tr key={title + '-title'}>
+        <tr key={title + '-title'} className="titleRow">
           <th className='spacer'></th>
           <th className='title'>{title}</th>
         </tr>
@@ -116,13 +116,30 @@ class Standings extends Component {
       </thead>
     )
     let place = 0
+    let divison = false
+    switch (title) {
+      case 'atlantic':
+        divison = true
+        break;
+      case 'metropolitan':
+        divison = true
+        break;
+      case 'central':
+        divison = true
+        break;
+      case 'pacific':
+        divison = true
+        break;
+      default:
+        divison = false;
+    }
     teams.forEach((team) => {
-      console.log(team.team.name, abbreviations[team.team.name])
+      place++;
       tableBody.push(
-        <tr key={team.team.name}>
-          <td>{++place}</td>
-          <td className='hidden-sm hidden-xs'>{team.team.name}</td>
-          <td className='visible-sm-* visible-xs-* hidden-md hidden-lg hidden-xl'>{abbreviations[team.team.name]}</td>
+        <tr key={team.team.name} id={title + '-' + place} className={place === 3 && divison ? 'playoff-line' : this.props.className}>
+          <td>{place}</td>
+          <td className='d-none d-lg-block'>{team.team.name}</td>
+          <td className='d-lg-none'>{abbreviations[team.team.name]}</td>
           <td>{team.points}</td>
           <td>{Math.round((team.points / (team.gamesPlayed * 2)) * 100)}
             %</td>

@@ -6,13 +6,14 @@
     "bootstrap": "^4.0.0-beta.3",
     "jquery": "^3.2.1",
     "node-sass": "^4.5.3",
-    "react": "^15.6.1",
-    "react-bootstrap": "^0.31.3",
-    "react-dom": "^15.6.1",
+    "popper.js": "^1.12.9",
+    "react": "^15.6.2",
+    "react-bootstrap": "^0.31.5",
+    "react-dom": "^15.6.2",
     "react-scripts": "0.9.5"
   },
   "devDependencies": {
-    "eslint": "^4.14.0",
+    "eslint": "^4.15.0",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",

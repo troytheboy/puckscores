@@ -55,10 +55,9 @@ class Scoreboard extends Component {
   renderGames () {
     const gameData = this.state.gameData
     let gamesHTML = []
-
     gameData.forEach((game) => {
       if (game !== undefined) {
-        gamesHTML.push(<Game key={game.gamePk} value={game} id={game.gamePk} standings={this.state.standings}/>)
+        gamesHTML.push(<Game key={game.gamePk} value={this.state.gameDataMap.get(game.gamePk)} id={game.gamePk} standings={this.state.standings}/>)
       }
     })
     return gamesHTML
@@ -170,8 +169,7 @@ class Scoreboard extends Component {
       links: [],
       gameData: [],
       gameDataMap: new Map(),
-      final: [],
-      active: []
+      final: []
     })
     this.getGames(newDate)
   }
@@ -182,11 +180,11 @@ class Scoreboard extends Component {
         <div className='scoreboard' id='scoreboard'>
           <div className='daySelector container'>
             <div className='row'>
-              <div className='col-md-4 col-sm-3 col-xs-2 text-left'>
+              <div className='col text-left'>
                 <i className='fa fa-chevron-left' aria-hidden='true' onClick={(e) => this.changeDate(e, -2)}></i>
               </div>
-              <div className='col-md-4 col-sm-6 col-xs-8 text-center'>{this.state.dateString}</div>
-              <div className='col-md-4 col-sm-3 col-xs-2 text-right'>
+              <div className='col text-center'>{this.state.dateString}</div>
+              <div className='col text-right'>
                 <i className='fa fa-chevron-right' aria-hidden='true' onClick={(e) => this.changeDate(e, 0)}></i>
               </div>
             </div>
@@ -209,6 +207,7 @@ class Scoreboard extends Component {
 }
 
 function Game (props) {
+  //props.onClick()
   const standings = props.standings
   const game = props.value
   const liveData = game.liveData
@@ -232,20 +231,21 @@ function Game (props) {
   let boardObject = (<div className='board'><p>{statusString}</p></div>)
   let mobileBoard = boardObject
   let matchup = (<div className='matchup'><h3>{away.team.abbreviation} @ {home.team.abbreviation}</h3></div>)
-  let scoreObject = (<div className='score'> VS </div>)
+  let scoreObject = (<div className='score row'><div className='col'>VS</div></div>)
   let threeStars = (<div className='threeStars'></div>)
   let gameInfoObject = (
     <div className='gameInfo container'>
       <div className='row'>
-        <div className='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+        <div className='col-5'>
           <h2>{away.team.name}</h2>
           <p>{away.standings.leagueRecord.wins}-{away.standings.leagueRecord.losses}-{away.standings.leagueRecord.ot}</p>
-          <p className='hidden-xs'>{suffixer(away.standings.divisionRank)} {away.standings.division}</p>
+          <p className='hidden-xs'>{suffixer(away.standings.divisionRank)}<br/>{away.standings.division}</p>
         </div>
-        <div className='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+        <div className='col-2'><br/><p className='d-none d-block-md'>Teams</p></div>
+        <div className='col-5'>
           <h2>{home.team.name}</h2>
           <p>{home.standings.leagueRecord.wins}-{home.standings.leagueRecord.losses}-{home.standings.leagueRecord.ot}</p>
-          <p className='hidden-xs'>{suffixer(home.standings.divisionRank)} {home.standings.division}</p>
+          <p className='hidden-xs'>{suffixer(home.standings.divisionRank)}<br/>{home.standings.division}</p>
         </div>
       </div>
     </div>)
@@ -276,17 +276,29 @@ function Game (props) {
     </div>
   )
   const closeSelected = () => {
-    $('.selectedGame').hide()
+    $('.selectedGame', '#' + game.gamePk).removeClass('open-animate')
+    $('.selectedGame', '#' + game.gamePk).addClass('close-animate')
+    $('body').css({ overflow: 'scroll' })
+    setTimeout(function() {$('.selectedGame').hide()}, 500)
   }
   const gameSelect = () => {
+    $('body').css({ overflow: 'hidden' })
+    $('.selectedGame', '#' + game.gamePk).removeClass('close-animate')
+    $('.selectedGame', '#' + game.gamePk).addClass('open-animate')
     $('.selectedGame', '#' + game.gamePk).show()
-  }
+}
   if (statusCode >= 3 && statusCode < 5) {
     if (timeRemaining.startsWith('0')) {
       timeRemaining = timeRemaining.slice(1)
     }
     statusString = period + ' ' + timeRemaining
-    scoreObject = (<div className='score'>{away.goals} - {home.goals}</div>)
+    scoreObject = (
+      <div className='score row'>
+          <div className='col text-center'>{away.goals}</div>
+          <div className='col text-center'>-</div>
+          <div className='col text-center'>{home.goals}</div>
+      </div>
+    )
     boardObject = (
       <div className='board'>
         <p>{statusString}</p>
@@ -301,7 +313,7 @@ function Game (props) {
     )
     mobileBoard = (
       <div className='row'>
-        <div className='teams col-xs-8'>
+        <div className='teams col-9'>
           <div>
             <img src={'img/teams/' + away.team.abbreviation + '.png'} alt={away.team.abbreviation}/>
           </div>
@@ -310,7 +322,7 @@ function Game (props) {
             <img src={'img/teams/' + home.team.abbreviation + '.png'} alt={home.team.abbreviation}/>
           </div>
         </div>
-        <div className='status col-xs-4'>
+        <div className='status col-3'>
           {statusString}
         </div>
       </div>
@@ -346,7 +358,7 @@ function Game (props) {
     )
     mobileBoard = (
       <div className='row'>
-        <div className='teams col-xs-8'>
+        <div className='teams col-9'>
           <div>
             <img src={'img/teams/' + away.team.abbreviation + '.png'} alt={away.team.abbreviation}/>
           </div>
@@ -355,7 +367,7 @@ function Game (props) {
             <img src={'img/teams/' + home.team.abbreviation + '.png'} alt={home.team.abbreviation}/>
           </div>
         </div>
-        <div className='status col-xs-4'>
+        <div className='status col-3'>
           {statusString}
         </div>
       </div>
@@ -366,7 +378,13 @@ function Game (props) {
     if (linescore.currentPeriod > 3) {
       statusString += (' ' + linescore.currentPeriodOrdinal)
     }
-    scoreObject = (<div className='score'>{away.goals} - {home.goals}</div>)
+    scoreObject = (
+      <div className='score row'>
+        <div className='col-4 text-center'>{away.goals}</div>
+        <div className='col-4 text-center'>-</div>
+        <div className='col-4 text-center'>{home.goals}</div>
+      </div>
+    )
     boardObject = (
       <div className='board'>
         <p>{statusString}</p>
@@ -381,7 +399,7 @@ function Game (props) {
     )
     mobileBoard = (
       <div className='row'>
-        <div className='teams col-xs-8'>
+        <div className='teams col-9'>
           <div>
             <img src={'img/teams/' + away.team.abbreviation + '.png'} alt={away.team.abbreviation}/>
           </div>
@@ -390,64 +408,72 @@ function Game (props) {
             <img src={'img/teams/' + home.team.abbreviation + '.png'} alt={home.team.abbreviation}/>
           </div>
         </div>
-        <div className='status col-xs-4'>
+        <div className='status col-3'>
           {statusString}
         </div>
       </div>
     )
-    threeStars = (
-      <div className='threeStars'>
-        <h2>Three Stars</h2>
-        <div className='star'>
-          <i className='fa fa-star' aria-hidden='true'></i>
-          <h3>{liveData.decisions.firstStar.fullName}</h3>
+    if (liveData.decisions.firstStar !== undefined) {
+      threeStars = (
+        <div className='threeStars container'>
+          <h2>Three Stars</h2>
+          <div className='row'>
+            <div className='star col'>
+              <i className='fa fa-star' aria-hidden='true'></i>
+              <h3>{liveData.decisions.firstStar.fullName}</h3>
+            </div>
+            <div className='star col'>
+              <i className='fa fa-star' aria-hidden='true'></i><i
+                className='fa fa-star' aria-hidden='true'></i>
+              <h3>{liveData.decisions.secondStar.fullName}</h3>
+            </div>
+            <div className='star col'>
+              <i className='fa fa-star' aria-hidden='true'></i><i
+                className='fa fa-star' aria-hidden='true'></i><i
+                className='fa fa-star' aria-hidden='true'></i>
+              <h3>{liveData.decisions.thirdStar.fullName}</h3>
+            </div>
+          </div>
         </div>
-        <div className='star'>
-          <i className='fa fa-star' aria-hidden='true'></i><i
-            className='fa fa-star' aria-hidden='true'></i>
-          <h3>{liveData.decisions.secondStar.fullName}</h3>
-        </div>
-        <div className='star'>
-          <i className='fa fa-star' aria-hidden='true'></i><i
-            className='fa fa-star' aria-hidden='true'></i><i
-            className='fa fa-star' aria-hidden='true'></i>
-          <h3>{liveData.decisions.thirdStar.fullName}</h3>
-        </div>
-      </div>
-    )
+      )
+    }
   }
   let selectedGame = (
     <div className='selectedGame'>
-      <div className='gameContent'>
-        <span onClick={closeSelected}>&times;</span>
+      <span onClick={closeSelected}><i className="fa fa-arrow-left" aria-hidden="true" alt='close'></i></span>
+      <div className='container'>
         <h1>{statusString}</h1>
         <p>{venue.name}</p>
-        <div className='scoreBoard'>
-          <div>
+      </div>
+      <div className='scoreBoard container'>
+        <div className='row'>
+          <div className='col-3 text-right'>
             <img src={'img/teams/' + away.team.abbreviation + '.png'}
               alt={away.team.abbreviation}/>
           </div>
-          {scoreObject}
-          <div>
+          <div className='col-6'>
+            {scoreObject}
+          </div>
+          <div className='col-3 text-left'>
             <img src={'img/teams/' + home.team.abbreviation + '.png'}
               alt={home.team.abbreviation}/>
           </div>
         </div>
-        {gameInfoObject}
-        {statusString.startsWith('Final') && threeStars}
-        {goals.length > 0 && goalsObject}
       </div>
+      {gameInfoObject}
+      {statusString.startsWith('Final') && threeStars}
+      {goals.length > 0 && goalsObject}
     </div>
   )
 
   return (
-    <div id={game.gamePk} className='col-lg-3 col-md-4'>
+    <div id={game.gamePk} className='col-lg-3 col-md-4 col-sm-6'>
       {selectedGame}
       <div onClick={gameSelect}>
-        <div className='game visible-xs container'>
+        <div className='game d-sm-none d-block container'>
           {mobileBoard}
         </div>
-        <div className='game hidden-xs'>
+        <div className='game d-sm-block d-none'>
           {boardObject}
           {matchup}
         </div>
