@@ -7,6 +7,10 @@ $cyan : #5bc0be;
 $white: #ffffff;
 $grey: #D3D3D3;
 
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 .App {
   text-align: center;
   background: whitesmoke;
@@ -79,6 +83,7 @@ div.standings {
       border: 2px solid $light_blue;
       tr {
         td {
+          text-align: left;
           border-top: none;
           font-size: 18px;
         }
@@ -91,7 +96,8 @@ div.standings {
       tr {
         th {
           cursor: pointer;
-          padding: 5px;
+          padding: 8px;
+          text-align: left;
         }
         th.spacer {
           width: 60px;
@@ -138,6 +144,17 @@ div.standings {
     transform: translate(-100%);
   }
 }
+@keyframes Arrow-open {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@keyframes Arrow-close {
+
+}
 div.daySelector {
   font-family: 'Orbitron', sans-serif;
   margin-top: 10px;
@@ -146,6 +163,7 @@ div.daySelector {
   padding: 10px;
   div.row {
     text-align: center;
+    //width: 100%;
     i {
       cursor: pointer;
     }
@@ -156,6 +174,12 @@ div.daySelector {
 }
 .close-animate {
   animation: Close-game 1 0.5s ease-out;
+}
+.open-arrow {
+  animation: Arrow-open 1 0.5 ease;
+}
+.close-arrow {
+  animation: Arrow-open 1 0.5 backwards;
 }
 div.selectedGame {
   display: none; /* Hidden by default */
@@ -179,7 +203,7 @@ div.selectedGame {
   span {
     z-index: 2000;
     float: right;
-    font-size: 40px;
+    font-size: 65px;
     cursor: pointer;
     //margin-top: 25px;
     //margin-right: 25px;
@@ -333,7 +357,7 @@ div.game {
       color: $cyan;
       font-family: 'Orbitron', sans-serif;
       padding: 15px 5px;
-      font-size: 14px;
+      font-size: 12px;
     }
   }
 }
@@ -395,7 +419,7 @@ div.loading {
   div.selectedGame {
     span {
       margin-right: 0;
-      font-size: 25px;
+      font-size: 45px;
     }
     div.gameInfo {
       //width: 500px;
@@ -578,7 +602,9 @@ div.loading {
     }
     div.scoringPlays {
       width: auto;
-      font-size: 14px;
+      font-size: 12px;
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 }

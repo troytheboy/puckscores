@@ -180,11 +180,11 @@ class Scoreboard extends Component {
         <div className='scoreboard' id='scoreboard'>
           <div className='daySelector container'>
             <div className='row'>
-              <div className='col text-left'>
+              <div className='col-2'>
                 <i className='fa fa-chevron-left' aria-hidden='true' onClick={(e) => this.changeDate(e, -2)}></i>
               </div>
-              <div className='col text-center'>{this.state.dateString}</div>
-              <div className='col text-right'>
+              <div className='col-8 text-center'>{this.state.dateString}</div>
+              <div className='col-2'>
                 <i className='fa fa-chevron-right' aria-hidden='true' onClick={(e) => this.changeDate(e, 0)}></i>
               </div>
             </div>
@@ -265,7 +265,7 @@ function Game (props) {
       <div key={goals[i].result.eventCode} className='goal'>
         <strong>{goals[i].team.triCode} </strong>
         {goals[i].about.ordinalNum} {goals[i].about.periodTime}
-        {' ' + scorer.player.fullName.split(' ')[0].charAt(0) + '. ' +
+        {' ' + scorer.player.fullName.split(' ')[0].charAt(0) + '.' +
         scorer.player.fullName.split(' ')[1]}({scorer.seasonTotal})
         {' ' + assists}</div>)
   }
@@ -278,6 +278,8 @@ function Game (props) {
   const closeSelected = () => {
     $('.selectedGame', '#' + game.gamePk).removeClass('open-animate')
     $('.selectedGame', '#' + game.gamePk).addClass('close-animate')
+    $('.fa-angle-left').removeClass('open-arrow')
+    $('.fa-angle-left').addClass('close-arrow')
     $('body').css({ overflow: 'scroll' })
     setTimeout(function() {$('.selectedGame').hide()}, 500)
   }
@@ -285,6 +287,9 @@ function Game (props) {
     $('body').css({ overflow: 'hidden' })
     $('.selectedGame', '#' + game.gamePk).removeClass('close-animate')
     $('.selectedGame', '#' + game.gamePk).addClass('open-animate')
+    //$('.fa-angle-left').removeClass('close-arrow')
+    $('.fa-angle-left').addClass('open-arrow')
+    console.log($('.fa-angle-left'))
     $('.selectedGame', '#' + game.gamePk).show()
 }
   if (statusCode >= 3 && statusCode < 5) {
@@ -294,9 +299,9 @@ function Game (props) {
     statusString = period + ' ' + timeRemaining
     scoreObject = (
       <div className='score row'>
-          <div className='col text-center'>{away.goals}</div>
-          <div className='col text-center'>-</div>
-          <div className='col text-center'>{home.goals}</div>
+          <div className='col-4 text-center'>{away.goals}</div>
+          <div className='col-4 text-center'>-</div>
+          <div className='col-4 text-center'>{home.goals}</div>
       </div>
     )
     boardObject = (
@@ -440,7 +445,7 @@ function Game (props) {
   }
   let selectedGame = (
     <div className='selectedGame'>
-      <span onClick={closeSelected}><i className="fa fa-arrow-left" aria-hidden="true" alt='close'></i></span>
+      <span onClick={closeSelected}><i className="fa fa-angle-left" aria-hidden="true" alt='close'></i></span>
       <div className='container'>
         <h1>{statusString}</h1>
         <p>{venue.name}</p>

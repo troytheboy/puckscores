@@ -109,7 +109,7 @@ class Standings extends Component {
         <tr key={title + '-legend'}>
           <th className='spacer'></th>
           <th>Team</th>
-          <th onClick={() => this.sortStandings('points')}>Points</th>
+          <th className='points' onClick={() => this.sortStandings('points')}>Points</th>
           <th onClick={() => this.sortStandings('%')}>Points %</th>
           <th className='hidden-mobile'>Record</th>
         </tr>
@@ -248,8 +248,8 @@ class Standings extends Component {
   render () {
     return (
       <div className='standings' id='standings'>
-        <h1>Standings</h1>
         <br/>
+        <h1>Standings</h1>
         <div className=' text-center container tableSelector'>
           <div className='row'>
             <div id='league-label'
@@ -269,7 +269,8 @@ class Standings extends Component {
             </div>
           </div>
         </div>
-        <br/> {this.state.activeTable}
+        <br/>
+        {this.state.activeTable}
       </div>
     )
   }
