@@ -180,11 +180,11 @@ class Scoreboard extends Component {
         <div className='scoreboard' id='scoreboard'>
           <div className='daySelector container'>
             <div className='row'>
-              <div className='col-2'>
+              <div className='col-3'>
                 <i className='fa fa-chevron-left' aria-hidden='true' onClick={(e) => this.changeDate(e, -2)}></i>
               </div>
-              <div className='col-8 text-center'>{this.state.dateString}</div>
-              <div className='col-2'>
+              <div className='col-6 text-center'>{this.state.dateString}</div>
+              <div className='col-3'>
                 <i className='fa fa-chevron-right' aria-hidden='true' onClick={(e) => this.changeDate(e, 0)}></i>
               </div>
             </div>
@@ -231,7 +231,7 @@ function Game (props) {
   let boardObject = (<div className='board'><p>{statusString}</p></div>)
   let mobileBoard = boardObject
   let matchup = (<div className='matchup'><h3>{away.team.abbreviation} @ {home.team.abbreviation}</h3></div>)
-  let scoreObject = (<div className='score row'><div className='col'>VS</div></div>)
+  let scoreObject = (<div className='score row'><div className='col text-center'>VS</div></div>)
   let threeStars = (<div className='threeStars'></div>)
   let gameInfoObject = (
     <div className='gameInfo container'>
@@ -318,17 +318,21 @@ function Game (props) {
     )
     mobileBoard = (
       <div className='row'>
-        <div className='teams col-9'>
-          <div>
-            <img src={'img/teams/' + away.team.abbreviation + '.png'} alt={away.team.abbreviation}/>
-          </div>
-          {scoreObject}
-          <div>
-            <img src={'img/teams/' + home.team.abbreviation + '.png'} alt={home.team.abbreviation}/>
+        <div className='teams col-8'>
+          <div className='row'>
+            <div className='col-3 text-right'>
+              <img src={'img/teams/' + away.team.abbreviation + '.png'} alt={away.team.abbreviation}/>
+            </div>
+            <div className='col-6 text-center'>
+              {scoreObject}
+            </div>
+            <div className='col-3 text-left'>
+              <img src={'img/teams/' + home.team.abbreviation + '.png'} alt={home.team.abbreviation}/>
+            </div>
           </div>
         </div>
-        <div className='status col-3'>
-          {statusString}
+        <div className='status col-4'>
+          <div className='text-center'>{statusString}</div>
         </div>
       </div>
     )
@@ -363,17 +367,21 @@ function Game (props) {
     )
     mobileBoard = (
       <div className='row'>
-        <div className='teams col-9'>
-          <div>
-            <img src={'img/teams/' + away.team.abbreviation + '.png'} alt={away.team.abbreviation}/>
-          </div>
-          {scoreObject}
-          <div>
-            <img src={'img/teams/' + home.team.abbreviation + '.png'} alt={home.team.abbreviation}/>
+        <div className='teams col-8'>
+          <div className='row'>
+            <div className='col-3 text-right'>
+              <img src={'img/teams/' + away.team.abbreviation + '.png'} alt={away.team.abbreviation}/>
+            </div>
+            <div className='col-6 text-center'>
+              {scoreObject}
+            </div>
+            <div className='col-3 text-left'>
+              <img src={'img/teams/' + home.team.abbreviation + '.png'} alt={home.team.abbreviation}/>
+            </div>
           </div>
         </div>
-        <div className='status col-3'>
-          {statusString}
+        <div className='status col-4'>
+          <div className='text-center'>{statusString}</div>
         </div>
       </div>
     )
@@ -404,17 +412,21 @@ function Game (props) {
     )
     mobileBoard = (
       <div className='row'>
-        <div className='teams col-9'>
-          <div>
-            <img src={'img/teams/' + away.team.abbreviation + '.png'} alt={away.team.abbreviation}/>
-          </div>
-          {scoreObject}
-          <div>
-            <img src={'img/teams/' + home.team.abbreviation + '.png'} alt={home.team.abbreviation}/>
+        <div className='teams col-8'>
+          <div className='row'>
+            <div className='col-3 text-right'>
+              <img src={'img/teams/' + away.team.abbreviation + '.png'} alt={away.team.abbreviation}/>
+            </div>
+            <div className='col-6 text-center'>
+              {scoreObject}
+            </div>
+            <div className='col-3 text-left'>
+              <img src={'img/teams/' + home.team.abbreviation + '.png'} alt={home.team.abbreviation}/>
+            </div>
           </div>
         </div>
-        <div className='status col-3'>
-          {statusString}
+        <div className='status col-4 active'>
+          <div className='text-center'>{statusString}</div>
         </div>
       </div>
     )
@@ -472,13 +484,13 @@ function Game (props) {
   )
 
   return (
-    <div id={game.gamePk} className='col-lg-3 col-md-4 col-sm-6'>
+    <div id={game.gamePk} className='game col-lg-3 col-md-4 col-sm-6 col-xs-12'>
       {selectedGame}
       <div onClick={gameSelect}>
-        <div className='game d-sm-none d-block container'>
+        <div className='gameContainer d-sm-none d-block container'>
           {mobileBoard}
         </div>
-        <div className='game d-sm-block d-none'>
+        <div className='gameContainer d-sm-block d-none'>
           {boardObject}
           {matchup}
         </div>

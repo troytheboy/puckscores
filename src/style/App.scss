@@ -6,7 +6,9 @@ $light_blue : #3a506b;
 $cyan : #5bc0be;
 $white: #ffffff;
 $grey: #D3D3D3;
-
+html {
+  background-color: whitesmoke;
+}
 body {
   max-width: 100%;
   overflow-x: hidden;
@@ -160,10 +162,8 @@ div.daySelector {
   margin-top: 10px;
   color: $blue;
   font-size: 26px;
-  padding: 10px;
   div.row {
     text-align: center;
-    //width: 100%;
     i {
       cursor: pointer;
     }
@@ -205,8 +205,6 @@ div.selectedGame {
     float: right;
     font-size: 65px;
     cursor: pointer;
-    //margin-top: 25px;
-    //margin-right: 25px;
   }
   h1 {
     margin-top: 25px;
@@ -219,18 +217,12 @@ div.selectedGame {
   div.scoreBoard {
     font-size: 75px;
     div.row {
-      div {
-        div.row {
-
-        }
-      }
       img {
         height: 85px;
       }
     }
   }
   div.gameInfo {
-    //width: 750px;
     div.row {
       div {
         h2 {
@@ -289,7 +281,7 @@ div.selectedGame {
     }
   }
 }
-div.game {
+div.gameContainer {
   cursor: pointer;
   position: relative;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
@@ -306,7 +298,6 @@ div.game {
     background-color: $white;
     padding: 10px;
     height: 125px;
-    //width: 240px;
     p {
       color: $blue;
       font-family: 'Orbitron', sans-serif;
@@ -361,16 +352,16 @@ div.game {
     }
   }
 }
-.game::after {
-  content: '';
-  position: absolute;
-  z-index: -1; /* hide shadow behind image */
-  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
-  width: 70%;
-  left: 15%; /* one half of the remaining 30% */
-  height: 100px;
-  bottom: 0;
-}
+// .game::after {
+//   content: '';
+//   position: absolute;
+//   z-index: -1; /* hide shadow behind image */
+//   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+//   width: 70%;
+//   left: 15%; /* one half of the remaining 30% */
+//   height: 125px;
+//   bottom: 0;
+// }
 div.loading {
   img {
     animation: Loading-spin infinite 2s linear;
@@ -388,7 +379,7 @@ div.loading {
 }
 
 @media only screen and (max-width: 1200px) {
-    .game {
+    .gameContainer {
       div.board {
         h2 {
           font-size: 18px;
@@ -422,7 +413,6 @@ div.loading {
       font-size: 45px;
     }
     div.gameInfo {
-      //width: 500px;
       width: auto;
       div.row {
         div {
@@ -434,7 +424,6 @@ div.loading {
       }
     }
     div.threeStars {
-      //width: 500px;
       div.row {
         width: auto;
         div.star {
@@ -461,7 +450,6 @@ div.loading {
           div.row {
             div {
               font-size: 45px;
-              //margin-top: 20px;
             }
           }
           img {
@@ -489,6 +477,48 @@ div.loading {
     }
     div.scoringPlays {
       width: auto;
+    }
+  }
+}
+@media only screen and (max-width: 575px) {
+  div.games {
+    div.game {
+      div.gameContainer {
+        background: $white;
+        div.row {
+          height: 100px;
+          div {
+            height: 100%;
+          }
+          div.teams {
+            div.row {
+              width: 100%;
+            }
+            div {
+              padding: 2px;
+              margin-top: 5px;
+              img {
+                width: auto;
+                height: 50px;
+              }
+              div.score {
+                font-size: 32px;
+              }
+            }
+          }
+          div.status {
+            background: $blue;
+            color: $white;
+            div {
+              padding: 15px;
+              font-size: 24px;
+            }
+          }
+          div.active {
+            color: $cyan;
+          }
+        }
+      }
     }
   }
 }
@@ -531,12 +561,15 @@ div.loading {
   }
   .App-header {
     background-color: $cyan;
-    height: 120px;
+    height: 140px;
     padding: 20px;
     color: white;
     margin-bottom: 10px;
     img {
       max-width: 200px;
+    }
+    div.links {
+      margin-top: 15px;
     }
   }
   div.daySelector {
@@ -546,65 +579,96 @@ div.loading {
       }
     }
   }
-  .game {
-    div.board {
-      height: 100px;
-      p {
-        font-size: 16px;
-      }
-      h2 {
-        img {
-          margin-left: 2px;
-          margin-right: 2px;
-          width: 30px;
-        }
-      }
-    }
-    div.matchup {
-      padding-top: 3px;
-      padding-bottom: 3px;
-      h3 {
-        margin: 0;
-        font-size: 15px;
-      }
-    }
-  }
-  div.selectedGame {
-    div.scoreBoard {
-      div.row {
-        div {
-          font-size: 20px;
-          img  {
-            height: 30px;
-            margin-top: 15px;
+  div.games {
+    div.game {
+      div.gameContainer {
+        div.board {
+          height: 200px;
+          p {
+            font-size: 16px;
           }
-          div.row {
+          h2 {
+            img {
+              margin-left: 2px;
+              margin-right: 2px;
+              width: 30px;
+            }
+          }
+        }
+        div.matchup {
+          padding-top: 3px;
+          padding-bottom: 3px;
+          h3 {
+            margin: 0;
+            font-size: 15px;
+          }
+        }
+        div.row {
+          div.teams {
+            div.row {
+              div {
+                img {
+                  height: auto;
+                  width: 45px;
+                }
+                div.score {
+                  font-size: 26px;
+                }
+              }
+
+            }
+          }
+          div.status {
             div {
-              font-size: 20px;
+              font-size: 18px;
+              padding: 20px 0;
             }
           }
         }
       }
-    }
-    div.gameInfo {
-      width: auto;
-      div.row {
-        div {
-          h2 {
-            font-size: 14px;
-            height: 2em;
+      div.selectedGame {
+        div.scoreBoard {
+          div.row {
+            div {
+              font-size: 26px;
+              margin-bottom: 10px;
+              img  {
+                height: 55px;
+                margin-top: 15px;
+              }
+              div.row {
+                div {
+                  font-size: 26px;
+                }
+              }
+            }
           }
-          p {
-            font-size: 10px;
+        }
+        div.gameInfo {
+          width: auto;
+          div.row {
+            div {
+              h2 {
+                font-size: 18px;
+                height: 3em;
+                margin-bottom: 15px;
+              }
+              p {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+        div.scoringPlays {
+          width: auto;
+          font-size: 16px;
+          padding-left: 0;
+          padding-right: 0;
+          div.goal {
+            padding: 0;
           }
         }
       }
-    }
-    div.scoringPlays {
-      width: auto;
-      font-size: 12px;
-      padding-left: 0;
-      padding-right: 0;
     }
   }
 }
@@ -613,17 +677,24 @@ div.loading {
   .hidden-mobile {
     display: none;
   }
-  .game {
-    div.board {
-      height: 75px;
-      p {
-        font-size: 12px;
-      }
-      h2 {
-        margin-top: 10px;
-        font-size: 14px;
-        img {
-          width: 20px;
+  div.games {
+    div.game {
+      div.gameContainer {
+        div.row {
+          div.teams {
+            div.row {
+              div {
+                margin-top: 7px;
+                img {
+                  height: auto;
+                  width: 40px;
+                }
+                div.score {
+                  font-size: 22px;
+                }
+              }
+            }
+          }
         }
       }
     }
