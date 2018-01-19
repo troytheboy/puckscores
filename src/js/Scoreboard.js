@@ -331,7 +331,7 @@ function Game (props) {
             </div>
           </div>
         </div>
-        <div className='status col-4'>
+        <div className='status col-4 active'>
           <div className='text-center'>{statusString}</div>
         </div>
       </div>

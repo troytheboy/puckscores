@@ -633,8 +633,9 @@ div.loading {
               font-size: 26px;
               margin-bottom: 10px;
               img  {
-                height: 55px;
+                height: auto;
                 margin-top: 15px;
+                width: 45px;
               }
               div.row {
                 div {
@@ -654,7 +655,7 @@ div.loading {
                 margin-bottom: 15px;
               }
               p {
-                font-size: 18px;
+                font-size: 14px;
               }
             }
           }
@@ -665,7 +666,7 @@ div.loading {
           padding-left: 0;
           padding-right: 0;
           div.goal {
-            padding: 0;
+            padding: 5px;
           }
         }
       }
