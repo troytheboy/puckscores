@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Orbitron');
+ @import url('https://fonts.googleapis.com/css?family=Lato');
 
 $dark_blue : #0b132b;
 $blue : #1c2541;
@@ -7,11 +8,27 @@ $cyan : #5bc0be;
 $white: #ffffff;
 $grey: #D3D3D3;
 html {
-  background-color: whitesmoke;
-}
-body {
-  max-width: 100%;
-  overflow-x: hidden;
+  background: whitesmoke;
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+    height: 100%;
+    background-color: whitesmoke;
+    footer {
+      position: relative;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 5px;
+      background-color: $blue;
+      color: $white;
+      text-align: center;
+      a:link, a:visited, a:link:active, a:link:visited {
+        color: $cyan;
+      }
+    }
+  }
 }
 .App {
   text-align: center;
@@ -53,10 +70,13 @@ body {
   }
 }
 
+div.scoreboard {
+  padding-bottom: 45px;
+}
+
 div.standings {
-  display: none;
   font-family: 'Orbitron', sans-serif;
-  padding-bottom: 15px;
+  padding-bottom: 45px;
   div.tableSelector.container {
     div.row {
       margin-left: auto;
@@ -121,6 +141,10 @@ div.standings {
       }
     }
   }
+}
+div.stats {
+  display: none;
+  font-family: 'Orbitron', sans-serif;
 }
 .App-intro {
   font-size: large;
@@ -214,7 +238,7 @@ div.selectedGame {
     color: $light_blue;
     font-weight: 700;
   }
-  div.scoreBoard {
+  div.scoreboard {
     font-size: 75px;
     div.row {
       img {
@@ -238,20 +262,29 @@ div.selectedGame {
     margin-left: auto;
     margin-right: auto;
     padding: 15px;
-    h3 {
-      color: $cyan;
-      margin-bottom: 25px;
+    p {
+      margin-bottom: 0px;
     }
     div.goal {
+      font-family: 'Lato', sans-serif;
       text-align: left;
       padding-top: 5px;
       padding-bottom: 5px;
       padding-left: 10%;
       padding-right: 10%;
       strong {
+        font-family: 'Orbitron', sans-serif;
         color: $cyan;
         min-width: 55px;
+        width: 65px;
       }
+      strong.teamName {
+        color: $blue;
+      }
+    }
+    h3 {
+      color: $cyan;
+      margin-bottom: 25px;
     }
   }
   div.threeStars {
@@ -297,6 +330,7 @@ div.gameContainer {
   div.board {
     background-color: $white;
     padding: 10px;
+    margin-top: 10px;
     height: 125px;
     p {
       color: $blue;
@@ -363,9 +397,10 @@ div.gameContainer {
 //   bottom: 0;
 // }
 div.loading {
+  min-height: 100vh;
   img {
     animation: Loading-spin infinite 2s linear;
-    margin-top: 125px;
+    margin-top: 150px;
     width: 200px;
     color: $blue;
   }
@@ -444,7 +479,7 @@ div.loading {
 }
 @media only screen and (max-width: 768px) {
   div.selectedGame {
-    div.scoreBoard {
+    div.scoreboard {
       div.row {
         div {
           div.row {
@@ -627,7 +662,7 @@ div.loading {
         }
       }
       div.selectedGame {
-        div.scoreBoard {
+        div.scoreboard {
           div.row {
             div {
               font-size: 26px;
